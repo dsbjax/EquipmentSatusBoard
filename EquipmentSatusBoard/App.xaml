@@ -4,6 +4,79 @@
              xmlns:local="clr-namespace:EquipmentSatusBoard"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="DialogbackGround" TargetType="Rectangle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="RadiusX" Value="10"/>
+            <Setter Property="RadiusY" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5"
+                                      Color="Black"
+                                      Opacity="100"
+                                      RenderingBias="Performance"
+                                      ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <RadialGradientBrush GradientOrigin="0.25,0.25" Center="0.25,0.25" RadiusX="0.75" RadiusY="0.75">
+                        <GradientStop Color="{DynamicResource {x:Static SystemColors.ControlLightColorKey}}" Offset="0"/>
+                        <GradientStop Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}" Offset="1"/>
+                    </RadialGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="EquipmentControlBackground" TargetType="Rectangle">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="RadiusX" Value="10"/>
+            <Setter Property="RadiusY" Value="10"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5"
+                                      Color="Black"
+                                      Opacity="100"
+                                      RenderingBias="Performance"
+                                      ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Fill">
+                <Setter.Value>
+                    <RadialGradientBrush GradientOrigin="0.25,0.25" Center="0.25,0.25" RadiusX="0.75" RadiusY="0.75">
+                        <GradientStop Color="#FF4369A0" Offset="0"/>
+                        <GradientStop Color="#FF0C61DC" Offset="1"/>
+                    </RadialGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DialogTitle" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="TimesNewRoman"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="TimesNewRoman"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="FontFamily" Value="TimeNewRoman"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5"
+                                      Color="Black"
+                                      Opacity="100"
+                                      RenderingBias="Performance"
+                                      ShadowDepth="5"/>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
     </Application.Resources>
 </Application>

@@ -1,0 +1,42 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EquipmentSatusBoard.EquipmentControls"
+             xmlns:CommonControls="clr-namespace:EquipmentSatusBoard.CommonControls" x:Class="EquipmentSatusBoard.EquipmentControls.Equipment"
+             mc:Ignorable="d">
+    <Grid Margin="5">
+        <Rectangle Name="equipmentStatusBackground" Width="175" Height="60" Fill="Green" Margin="0,6,0,0" RadiusX="5" RadiusY="5">
+            <Rectangle.Effect>
+                <DropShadowEffect/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <GroupBox Margin="3,0,3,3">
+            <GroupBox.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Button Name="adminDeleteButton" IsTabStop="False"  Content="X" Style="{x:Null}" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" ToolTip="Delete" Click="DeleteClick" Visibility="Collapsed"/>
+                    <Label x:Name="slideTechHeader" Content="On Line" Foreground="White" FontSize="12" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </GroupBox.Header>
+        </GroupBox>
+        <Label Name="slideEquipmentLabel" Content="Equipment" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+        <Label Name="techEquipmentLabel" Content="Equipment" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24">
+            <Label.ContextMenu>
+                <ContextMenu>
+                    <Label Content="Equipment Status"/>
+                    <MenuItem Name="operationalMenuItem" Header="Operational" IsChecked="True" Click="EquipmentStatusClick"/>
+                    <MenuItem Name="degradedMenuItem" Header="Degraded" Click="EquipmentStatusClick"/>
+                    <MenuItem Name="downMenuItem" Header="Down" Click="EquipmentStatusClick"/>
+                    <Separator/>
+                    <Label Content="Operational Status"/>
+                    <MenuItem Name="onLineMenuItem" Header="On-Line" IsChecked="True" Click="OperationalStatusClick"/>
+                    <MenuItem Name="offLineMenuItem" Header="Off-Line" Click="OperationalStatusClick"/>
+                    <Separator/>
+                    <MenuItem Name="scheduleOutageMenuItem" Header="New Scheduled Outage" Click="ScheduleOutageClick"/>
+                </ContextMenu>
+            </Label.ContextMenu>
+        </Label>
+        <TextBox Name="adminEquipmentTextBox" Text="Equipment" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontFamily="TimesNewRoman" Background="{x:Null}" BorderBrush="{x:Null}" TextChanged="AdminEquipmentTextChanged"/>
+    </Grid>
+</UserControl>

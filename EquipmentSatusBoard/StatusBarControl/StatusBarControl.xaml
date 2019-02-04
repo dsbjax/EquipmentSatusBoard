@@ -1,0 +1,32 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EquipmentSatusBoard.StatusBarControl"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="EquipmentSatusBoard.StatusBarControl.StatusBarControl"
+             mc:Ignorable="d">
+
+    <UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Rows="1" Columns="3" Background="Black">
+        <StackPanel x:Name="controlsPanel" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                <Button x:Name="modeChangeRequest" Content="Mode: Slide" ToolTip="Change Operating Mode: Slide, Technician or Administration" HorizontalAlignment="Center" Margin="10,0" VerticalAlignment="Center" Width="150" Click="ModeChangeRequestClick"/>
+                <Label Content="Duty Tech:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                <Label Name="slideDutyTech" Content="Phone" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                <TextBox Name="adminDutyTech" Text="Phone" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TextChanged="AdminDutyTechTextChanged"/>
+                <Label Content="CDO:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" Margin="10,0,0,0"/>
+                <Label Name="slideCDO" Content="Phone" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
+                <TextBox Name="adminCDO" Text="Phone" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Visibility="Collapsed" TextChanged="AdminCDOTextChanged"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel x:Name="datePanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label x:Name="date" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" x:Name="timePanel" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+            <Label Content="UTC: " Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label x:Name="utc" Content="HHmm" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Local: " Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,0,0,0"/>
+            <Label x:Name="local" Content="HHmm" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+    </UniformGrid>
+</UserControl>

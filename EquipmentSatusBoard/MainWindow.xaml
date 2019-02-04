@@ -1,12 +1,61 @@
-﻿<Window x:Class="EquipmentSatusBoard.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentSatusBoard"
+        xmlns:StatusBarControl="clr-namespace:EquipmentSatusBoard.StatusBarControl" xmlns:EquipmentNotesControl="clr-namespace:EquipmentSatusBoard.EquipmentNotesControl" xmlns:EquipmentControls="clr-namespace:EquipmentSatusBoard.EquipmentControls" xmlns:StatusBoardControl="clr-namespace:EquipmentSatusBoard.StatusBoardControl" x:Class="EquipmentSatusBoard.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Equipment Status Board" Height="1080" Width="1920" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
+    </Window.Background>
     <Grid>
-        
+        <DockPanel>
+            <Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2,1,2,2">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+                    </Border.BorderBrush>
+                    <Grid x:Name="statusBarPanel" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="50">
+                        <StatusBarControl:StatusBarControl x:Name="mainStatusBar" VerticalAlignment="Stretch"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <UniformGrid DockPanel.Dock="Right" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="300" Columns="1" Rows="2">
+                <Grid>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+                        </Border.BorderBrush>
+                    </Border>
+                    <Grid x:Name="scheduledOutagePanel" Margin="2"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="101*"/>
+                        <ColumnDefinition Width="49*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" Grid.ColumnSpan="2">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+                        </Border.BorderBrush>
+                    </Border>
+                    <EquipmentNotesControl:EquipmentNotes x:Name="equipmentNotes" Grid.ColumnSpan="2"/>
+                </Grid>
+            </UniformGrid>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top">
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2">
+                    <Border.BorderBrush>
+                        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+                    </Border.BorderBrush>
+                </Border>
+                <Grid x:Name="equipmentStatusPanel" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                    <StatusBoardControl:EquipmentStatusPageController HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                </Grid>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>

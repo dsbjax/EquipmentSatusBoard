@@ -1,0 +1,22 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EquipmentSatusBoard.Forms"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="EquipmentSatusBoard.Forms.NewGroupDialog"
+        mc:Ignorable="d" Height="184" Width="603" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Rectangle Style="{StaticResource DialogbackGround}"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Create New Equipment Group" Style="{StaticResource DialogTitle}"/>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Content="Group Name:" VerticalAlignment="Center"/>
+                <TextBox x:Name="groupName" Width="200" VerticalAlignment="Center" Text="New Group"/>
+                <Label Content="Equipment Count:" Margin="10,0,0,0"/>
+                <xctk:IntegerUpDown Name="equipmentCount" Width="75" VerticalAlignment="Center" FontSize="16" FontFamily="Times New Roman" Minimum="0" Maximum="64" Value="0"/>
+            </StackPanel>
+            <Button Name="createGroup" Content="Enter to create new group" Style="{x:Null}" Margin="0" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="16" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center" IsDefault="True" Click="CreateGroupClick"/>
+        </StackPanel>
+    </Grid>
+</Window>
