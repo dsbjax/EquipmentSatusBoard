@@ -5,32 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentSatusBoard.EquipmentControls"
              mc:Ignorable="d">
-    <Grid Margin="5">
-        <GroupBox BorderBrush="White">
+    <Grid Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <GroupBox Name="groupBox" BorderBrush="White">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
                     <Button Name="adminDeleteButton" IsTabStop="False" Content="X" Style="{x:Null}" Visibility="Collapsed" Click="AdminDeleteButtonClick" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     <Label Name="slideTechHeader" Content="New Group" Foreground="White" FontSize="24"/>
-                    <TextBox Name="adminHeader" Text="New Group" Visibility="Collapsed" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" TextChanged="AdminHeaderTextChanged" />
-                    <Button Name="adminAddGroupButton" IsTabStop="False"  Content="+Group" Style="{x:Null}" Visibility="Collapsed" Click="AdminAddGroupButtonClick" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                    <Button Name="adminAddEquipmentButton" IsTabStop="False"  Content="+Equipment" Style="{x:Null}" Visibility="Collapsed" Click="AdminAddEquipmentClick" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                    <Button Name="adminWrapButton" IsTabStop="False"  Content="No Wrap" Style="{x:Null}" Visibility="Collapsed" Click="AdminWrapButtonClick" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                    <Button Name="adminOrientationButton" IsTabStop="False"  Content="Vertical" Style="{x:Null}" Visibility="Collapsed" Click="AdminOrientationButtonClick" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    <TextBox Name="adminHeader" Text="New Group" Visibility="Collapsed" Foreground="White" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" TextChanged="AdminHeaderTextChanged" />
                 </StackPanel>
             </GroupBox.Header>
             <DockPanel>
                 <Menu DockPanel.Dock="Top" Background="{x:Null}">
-                    <MenuItem Header="Equipment Group" Foreground="White">
-                        <MenuItem Header="Add Equipment Group" Foreground="Black"/>
-                        <MenuItem Header="Add Equipment" Foreground="Black"/>
+                    <MenuItem Name="adminMenu" Header="Modify Equipment Group" Foreground="White">
+                        <MenuItem Name="addEquipmentGroup" Header="Add Equipment Group" Foreground="Black" Click="AddEquipmentGroupClick"/>
+                        <MenuItem Name="addEquipment" Header="Add Equipment" Foreground="Black" Click="AddEquipmentClick"/>
                         <Separator/>
-                        <MenuItem Header="Wrap" IsChecked="True" Foreground="Black"/>
-                        <MenuItem Header="Vertical Orientaion" Foreground="Black"/>
+                        <MenuItem Name="isWrap" Header="Wrap" IsChecked="True" Foreground="Black" Click="IsWrapClick"/>
+                        <MenuItem Name="isHorizontal" Header="Horizontal Orientaion" IsChecked="True" Foreground="Black" Click="IsHorizontalClick"/>
+                        <Separator/>
+                        <MenuItem Name="hide" Header="Hide/Unhide" Foreground="Black" Click="HideClick"/>
                     </MenuItem>
                 </Menu>
                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <WrapPanel Name="wrapGroupPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <StackPanel Name="noWrapGroupPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <WrapPanel Name="wrapGroupPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal"/>
+                    <DockPanel Name="noWrapGroupPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                 </Grid>
             </DockPanel>
         </GroupBox>

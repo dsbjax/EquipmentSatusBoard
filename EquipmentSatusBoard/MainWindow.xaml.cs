@@ -28,6 +28,8 @@ namespace EquipmentSatusBoard
             AppModeNotifications.Subscribe(this);
 
             Events();
+            statusBoard.LoadStatusPages();
+            appModeNotifications.Broadcast(AppMode.Slide);
         }
 
         private void Events()
@@ -131,6 +133,8 @@ namespace EquipmentSatusBoard
         {
             mainStatusBar.SavePhoneNumbers();
             equipmentNotes.SaveEquipmentNotes();
+            statusBoard.Save();
+
             base.OnClosing(e);
         }
     }

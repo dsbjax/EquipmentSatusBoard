@@ -7,13 +7,14 @@
     <ProjectGuid>{BED70DF5-58B6-4BDD-A899-93C34D5F8FC2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>EquipmentSatusBoard</RootNamespace>
-    <AssemblyName>EquipmentSatusBoard</AssemblyName>
+    <AssemblyName>Equipment Satus Board</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -101,6 +101,17 @@
     <Compile Include="Forms\NewGroupDialog.xaml.cs">
       <DependentUpon>NewGroupDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NewScheduledOutageForm.xaml.cs">
+      <DependentUpon>NewScheduledOutageForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TimeTextBox.cs" />
+    <Compile Include="ScheduledOutageControls\EquipmentScheduledOutage.xaml.cs">
+      <DependentUpon>EquipmentScheduledOutage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduledOutageControls\ScheduledOutageController.xaml.cs">
+      <DependentUpon>ScheduledOutageController.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduledOutageControls\ScheduledOutages.cs" />
     <Compile Include="StatusBarControl\StatusBarControl.xaml.cs">
       <DependentUpon>StatusBarControl.xaml</DependentUpon>
     </Compile>
@@ -147,6 +158,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\NewScheduledOutageForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +179,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ScheduledOutageControls\EquipmentScheduledOutage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScheduledOutageControls\ScheduledOutageController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StatusBarControl\StatusBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

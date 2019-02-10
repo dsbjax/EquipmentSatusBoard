@@ -22,7 +22,9 @@
                         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlLightLightColorKey}}"/>
                     </Rectangle.Fill>
                 </Rectangle>
-                <TextBox Name="equipmentNotes" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top" Background="{x:Null}" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" IsReadOnly="True" AcceptsReturn="True">
+                <TextBox Name="equipmentNotes" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top" 
+                         Background="{x:Null}" BorderBrush="{x:Null}" SpellCheck.IsEnabled="True" IsReadOnly="True" AcceptsReturn="True"
+                         TextWrapping="Wrap" FontFamily="Times New Roman" FontSize="24">
                 </TextBox>
             </Grid>
 
