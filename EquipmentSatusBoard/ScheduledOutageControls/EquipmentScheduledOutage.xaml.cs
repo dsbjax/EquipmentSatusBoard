@@ -102,13 +102,13 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if (DateTime.Now.Date.CompareTo(start.Date) > 0)
+            if (DateTime.UtcNow.Date.CompareTo(start.Date) > 0)
                 background.Fill = Brushes.LightBlue;
 
-            if (DateTime.Now.Date.CompareTo(start.Date) == 0)
+            if (DateTime.UtcNow.Date.CompareTo(start.Date) == 0)
                 background.Fill = Brushes.LightGreen;
 
-            if (DateTime.Now.CompareTo(start) > -1 && DateTime.Now.CompareTo(end) < 1)
+            if (DateTime.UtcNow.CompareTo(start) > -1 && DateTime.UtcNow.CompareTo(end) < 1)
             {
                 background.Fill = Brushes.Red;
                 equipment.StartScheduledOutage();

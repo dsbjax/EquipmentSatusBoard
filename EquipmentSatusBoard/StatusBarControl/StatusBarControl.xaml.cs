@@ -55,6 +55,7 @@ namespace EquipmentSatusBoard.StatusBarControl
             }
 
             modeChangeRequest.Content = "Mode: " + newMode.ToString();
+            Keyboard.ClearFocus();
         }
 
         private void TimerTick(object sender, EventArgs e)
