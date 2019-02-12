@@ -15,54 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_070702E575C34D9996B440B8D89AF61C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_073CC349678549AA81BC7697990FA2CB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_0BBD2F75C08240AB82C7B6D9151F0098"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_11F0743761EE4B60A2B52BCC18873C44"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_205943ACC1F6478E905CB1A01AF617F3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_48A65A98D5414ACDBE2847B5836E4407"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_56E0E2CF726347BDBCD35B06B3C3C177"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_748ED7FF0ABF4B3ABCE3EA78A6F30629"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_76F74659900A66A07F29A1ECECAD8AE4"
         "OwnerKey" = "8:_7835573C4AA14F7AA85EA69ADB5F546D"
         "MsmSig" = "8:_UNDEFINED"
@@ -75,26 +27,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_90DB0E12AD9E400DA44A94141CA6A518"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_979BD74D95294E35A7258013E9F20C5F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A3E23E144B84B99E8C374258AB7ACA77"
         "OwnerKey" = "8:_7835573C4AA14F7AA85EA69ADB5F546D"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F91A0B1B28EC49D4827D2029774B51AA"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -164,6 +98,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -194,166 +136,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_070702E575C34D9996B440B8D89AF61C"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\Sealord Watch Floor STARS.page"
-            "TargetName" = "8:Sealord Watch Floor STARS.page"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_073CC349678549AA81BC7697990FA2CB"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\FACSFAC Comms Page 1.page"
-            "TargetName" = "8:FACSFAC Comms Page 1.page"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0BBD2F75C08240AB82C7B6D9151F0098"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\esb.notes"
-            "TargetName" = "8:esb.notes"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_11F0743761EE4B60A2B52BCC18873C44"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\FACTS Shadow Room Status Board.status"
-            "TargetName" = "8:FACTS Shadow Room Status Board.status"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_205943ACC1F6478E905CB1A01AF617F3"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\STARS Status Board.status"
-            "TargetName" = "8:STARS Status Board.status"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_48A65A98D5414ACDBE2847B5836E4407"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\Bristol-Back Room STARS.page"
-            "TargetName" = "8:Bristol-Back Room STARS.page"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56E0E2CF726347BDBCD35B06B3C3C177"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\esb.status"
-            "TargetName" = "8:esb.status"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_748ED7FF0ABF4B3ABCE3EA78A6F30629"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\FACSFAC Comms Page 2.page"
-            "TargetName" = "8:FACSFAC Comms Page 2.page"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_76F74659900A66A07F29A1ECECAD8AE4"
             {
             "AssemblyRegister" = "3:1"
@@ -383,46 +165,6 @@
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90DB0E12AD9E400DA44A94141CA6A518"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\Bristol-Back Room.page"
-            "TargetName" = "8:Bristol-Back Room.page"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_979BD74D95294E35A7258013E9F20C5F"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\esb.phones"
-            "TargetName" = "8:esb.phones"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A3E23E144B84B99E8C374258AB7ACA77"
@@ -456,32 +198,79 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F91A0B1B28EC49D4827D2029774B51AA"
-            {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\bin\\Debug\\Sealord Shadow Room.page"
-            "TargetName" = "8:Sealord Shadow Room.page"
-            "Tag" = "8:"
-            "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
         }
         "FileType"
         {
         }
         "Folder"
         {
+            "{994432C3-9487-495D-8656-3E829A8DBDDE}:_20A3DF6535C24871A36D4D14F731F401"
+            {
+            "DefaultLocation" = "8:C:\\"
+            "Name" = "8:Custom Folder"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:CDRIVE"
+                "Folders"
+                {
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_D786ECFD58674D05A0CDB2F0563449AC"
+                    {
+                    "Name" = "8:ProgramData"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_76EC4C6D024347ECA88F93D5CD26CEAA"
+                        "Folders"
+                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_5CE24617EEE1444FA00A628078FCF72C"
+                            {
+                            "Name" = "8:KBR Wyle"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_FDA199E47D8342919E51FBEA48A3EE57"
+                                "Folders"
+                                {
+                                    "{9EF0B969-E518-4E46-987F-47570745A589}:_685300C54A0D4E8A87F38D58EE801335"
+                                    {
+                                    "Name" = "8:Equipment Status Board"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_829AA58C9766435C843F8EB0104AC324"
+                                        "Folders"
+                                        {
+                                            "{9EF0B969-E518-4E46-987F-47570745A589}:_5954092221494A53B0D3ECA130826F27"
+                                            {
+                                            "Name" = "8:Saved Pages"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "Property" = "8:_4351A26B99D143F4AB9DA21E20CFEB92"
+                                                "Folders"
+                                                {
+                                                }
+                                            }
+                                            "{9EF0B969-E518-4E46-987F-47570745A589}:_6EB40373B0384D5594F30BA0338D675B"
+                                            {
+                                            "Name" = "8:Images"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "Property" = "8:_9660338F8B0D44A4AC2C3A91923DC1A5"
+                                                "Folders"
+                                                {
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             "{1525181F-901A-416C-8A58-119130FE478E}:_3FA31F824B1F474AA27EA1AD4B312A2D"
             {
             "Name" = "8:#1916"
@@ -555,12 +344,12 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Equipment Status Board"
         "ProductCode" = "8:{1EDE3433-5A3E-4F4E-91EE-7DEC67C5146D}"
-        "PackageCode" = "8:{58B45E5D-4A9E-4EBE-89E5-26096899052D}"
+        "PackageCode" = "8:{7C4A0A5B-5B74-4D5E-B167-92FCF01B686C}"
         "UpgradeCode" = "8:{E9F63D3C-FE9C-4079-8DC8-07C9A5B470DD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
-        "DetectNewerInstalledVersion" = "11:TRUE"
+        "RemovePreviousVersions" = "11:TRUE"
+        "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
         "Manufacturer" = "8:KBR Wyle"

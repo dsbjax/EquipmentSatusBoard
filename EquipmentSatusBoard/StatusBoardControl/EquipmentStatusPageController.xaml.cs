@@ -25,7 +25,16 @@ namespace EquipmentSatusBoard.StatusBoardControl
     /// </summary>
     public partial class EquipmentStatusPageController : UserControl, IAppMode
     {
-        private const string STATUS_BOARD_FILENAME = "esb.status";
+        private static string CURRENT_STATUS_BOARD_FOLDER = 
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+            Properties.Settings.Default.AppDataFolder;
+
+        private static string CURRENT_STATUS_BOARD_FILE = CURRENT_STATUS_BOARD_FOLDER + 
+            Properties.Settings.Default.CurrentStatusBoardFilename;
+
+        private string SAVED_STATUS_PAGES_FOLDER = 
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + 
+            Properties.Settings.Default.SavedPagesFolder;
 
         int pageCount = 0, currentPage = 0;
         DispatcherTimer timer = new DispatcherTimer();
@@ -99,7 +108,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         public void Save()
         {
-            Save(STATUS_BOARD_FILENAME);
+            Save(CURRENT_STATUS_BOARD_FILE);
         }
 
         private void Save(string filename)
@@ -137,8 +146,8 @@ namespace EquipmentSatusBoard.StatusBoardControl
         {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Title = "Load Status Page";
-            openFile.Filter = "Equipment Status Page|*.page|Equipment Status Board|*.status";
-            openFile.InitialDirectory = Directory.GetCurrentDirectory();
+            openFile.Filter = "Equipment Status Page|*.page|Equipment Status Board|*.status|All Files|*.*";
+            openFile.InitialDirectory = SAVED_STATUS_PAGES_FOLDER;
             openFile.Multiselect = false;
 
             if(openFile.ShowDialog() == true)
@@ -194,7 +203,8 @@ namespace EquipmentSatusBoard.StatusBoardControl
             saveFile.AddExtension = true;
             saveFile.DefaultExt = ".page";
             saveFile.Title = "Save Status Page";
-            saveFile.InitialDirectory = Directory.GetCurrentDirectory();
+            saveFile.InitialDirectory = SAVED_STATUS_PAGES_FOLDER;
+            
             saveFile.OverwritePrompt = true;
             saveFile.Filter = "Equipment Status Page|*.page";
 
@@ -222,7 +232,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
             saveFile.AddExtension = true;
             saveFile.DefaultExt = ".status";
             saveFile.Title = "Save Equipment Status Board";
-            saveFile.InitialDirectory = Directory.GetCurrentDirectory();
+            saveFile.InitialDirectory = SAVED_STATUS_PAGES_FOLDER;
             saveFile.OverwritePrompt = true;
             saveFile.Filter = "Equipment Status Board|*.status";
 
@@ -248,7 +258,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         public void LoadStatusPages()
         {
-            LoadStatusPages(STATUS_BOARD_FILENAME);
+            LoadStatusPages(CURRENT_STATUS_BOARD_FILE);
         }
     }
 }

@@ -23,7 +23,11 @@ namespace EquipmentSatusBoard.StatusBarControl
     /// </summary>
     public partial class StatusBarControl : UserControl, IAppMode
     {
-        private const string PHONE_NUMBERS_FILE = "esb.phones";
+        private static string PHONE_NUMBERS_FOLDER = 
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
+            + Properties.Settings.Default.AppDataFolder;
+
+        private static string PHONE_NUMBERS_FILE = PHONE_NUMBERS_FOLDER + Properties.Settings.Default.SavedPhoneNumbersFilename;
 
         internal delegate void AppModeChangeRequestEventHandler(object sender, EventArgs e);
         internal event AppModeChangeRequestEventHandler AppModeChangeRequest;
@@ -55,7 +59,7 @@ namespace EquipmentSatusBoard.StatusBarControl
             }
 
             modeChangeRequest.Content = "Mode: " + newMode.ToString();
-            Keyboard.ClearFocus();
+//            Focus();
         }
 
         private void TimerTick(object sender, EventArgs e)

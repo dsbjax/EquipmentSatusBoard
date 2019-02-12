@@ -6,6 +6,7 @@ using System.Windows;
 using EquipmentSatusBoard.Forms;
 using System;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace EquipmentSatusBoard
 {
@@ -14,7 +15,12 @@ namespace EquipmentSatusBoard
     /// </summary>
     public partial class MainWindow : Window, IAppMode
     {
-        private const string PASSWORD_FILE = "esbpswd.dll";
+        private static string PASSWORD_FOLDER =
+            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+            Properties.Settings.Default.AppDataFolder;
+
+        private static string PASSWORD_FILE = PASSWORD_FOLDER + Properties.Settings.Default.PasswordFilename;
+
         private const int PASSWORD_BYTE_SIZE = 32;
 
         private AppModeNotifications appModeNotifications = new AppModeNotifications();
@@ -112,13 +118,13 @@ namespace EquipmentSatusBoard
 
         private void SavePassword(AppModePassword[] passwords)
         {
+            if (!Directory.Exists(PASSWORD_FOLDER)) Directory.CreateDirectory(PASSWORD_FOLDER);
             using (FileStream writer = new FileStream(PASSWORD_FILE, FileMode.Create, FileAccess.Write))
             {
                 writer.Write(passwords[0].Password, 0, PASSWORD_BYTE_SIZE);
                 writer.Write(passwords[1].Password, 0, PASSWORD_BYTE_SIZE);
                 writer.Close();
             }
-
         }
 
         public void SetMode(AppMode newMode)
@@ -136,6 +142,12 @@ namespace EquipmentSatusBoard
             statusBoard.Save();
 
             base.OnClosing(e);
+        }
+
+        private void CheckForQuit(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.X && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                Close();
         }
     }
 }

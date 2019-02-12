@@ -1,7 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EquipmentSatusBoard.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AppDataFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\KBR Wyle\Equipment Status Board</Value>
+    </Setting>
+    <Setting Name="SavedPagesFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\KBR Wyle\Equipment Status Board\Saved Pages</Value>
+    </Setting>
+    <Setting Name="ImagesFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\KBR Wyle\Equipment Status Board\Images</Value>
+    </Setting>
+    <Setting Name="CurrentStatusBoardFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\current.status</Value>
+    </Setting>
+    <Setting Name="SavedPhoneNumbersFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\esb.phones</Value>
+    </Setting>
+    <Setting Name="SavedNotesFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\esb.notes</Value>
+    </Setting>
+    <Setting Name="PasswordFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\esbpwd.bin</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

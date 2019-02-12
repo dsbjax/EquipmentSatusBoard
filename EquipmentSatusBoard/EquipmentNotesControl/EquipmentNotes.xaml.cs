@@ -22,7 +22,12 @@ namespace EquipmentSatusBoard.EquipmentNotesControl
     /// </summary>
     public partial class EquipmentNotes : UserControl, IAppMode
     {
-        private const string EQUIPMENT_NOTES_FILENAME = "esb.notes";
+        private static string EQUIPMENT_NOTES_FOLDER = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+            Properties.Settings.Default.AppDataFolder;
+
+        private static string EQUIPMENT_NOTES_FILENAME = EQUIPMENT_NOTES_FOLDER + 
+            Properties.Settings.Default.SavedNotesFilename;
+
         public EquipmentNotes()
         {
             InitializeComponent();
@@ -50,6 +55,8 @@ namespace EquipmentSatusBoard.EquipmentNotesControl
 
         internal void SaveEquipmentNotes()
         {
+            if (!Directory.Exists(EQUIPMENT_NOTES_FOLDER)) Directory.CreateDirectory(EQUIPMENT_NOTES_FOLDER);
+
             using (StreamWriter writer = new StreamWriter(EQUIPMENT_NOTES_FILENAME))
                 writer.Write(equipmentNotes.Text);
         }

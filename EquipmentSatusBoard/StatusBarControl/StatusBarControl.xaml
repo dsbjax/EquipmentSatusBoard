@@ -10,7 +10,7 @@
     <UniformGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Rows="1" Columns="3" Background="Black">
         <StackPanel x:Name="controlsPanel" HorizontalAlignment="Left" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-                <Button x:Name="modeChangeRequest" Content="Mode: Slide" ToolTip="Change Operating Mode: Slide, Technician or Administration" 
+                <Button x:Name="modeChangeRequest" Focusable="False" Content="Mode: Slide" ToolTip="Change Operating Mode: Slide, Technician or Administration" 
                         HorizontalAlignment="Center" Margin="10,0" VerticalAlignment="Center" Width="150" Click="ModeChangeRequestClick"
                         Style="{x:Null}" FontFamily="Times New Roman" FontSize="16" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"/>
                 <Label Content="Duty Tech:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>

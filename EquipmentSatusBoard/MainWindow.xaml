@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EquipmentSatusBoard"
         xmlns:StatusBarControl="clr-namespace:EquipmentSatusBoard.StatusBarControl" xmlns:EquipmentNotesControl="clr-namespace:EquipmentSatusBoard.EquipmentNotesControl" xmlns:EquipmentControls="clr-namespace:EquipmentSatusBoard.EquipmentControls" xmlns:StatusBoardControl="clr-namespace:EquipmentSatusBoard.StatusBoardControl" xmlns:ScheduledOutageControls="clr-namespace:EquipmentSatusBoard.ScheduledOutageControls" x:Class="EquipmentSatusBoard.MainWindow"
         mc:Ignorable="d"
-        Title="Equipment Status Board" Height="1080" Width="1920" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None">
+        Title="Equipment Status Board" Height="1080" Width="1920" WindowStartupLocation="Manual" WindowState="Maximized" WindowStyle="None" KeyDown="CheckForQuit">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.AppWorkspaceColorKey}}"/>
     </Window.Background>
