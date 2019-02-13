@@ -14,8 +14,38 @@
         </ContextMenu>
     </UserControl.ContextMenu>
     <Grid HorizontalAlignment="Stretch">
-        <Rectangle x:Name="background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" RadiusX="5" RadiusY="5" Fill="LightBlue"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7">
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </Border.BorderBrush>
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" Margin="1">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+            </Border.BorderBrush>
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="3" Margin="3">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+            </Border.BorderBrush>
+
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" Margin="6">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkColorKey}}"/>
+            </Border.BorderBrush>
+        </Border>
+
+        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" Margin="8">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
+            </Border.BorderBrush>
+        </Border>
+
+        <StackPanel Name="background" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="8" Background="LightBlue">
             <Label x:Name="equipmentLabel" Content="Equipment" HorizontalAlignment="Center" FontWeight="Bold"/>
             <StackPanel Orientation="Horizontal">
                 <Label x:Name="startLabel" VerticalAlignment="Center" Content="MM/dd HHMM" FontSize="16"/>

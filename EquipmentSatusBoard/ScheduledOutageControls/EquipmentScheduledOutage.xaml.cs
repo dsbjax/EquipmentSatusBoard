@@ -103,14 +103,14 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
         private void TimerTick(object sender, EventArgs e)
         {
             if (DateTime.UtcNow.Date.CompareTo(start.Date) > 0)
-                background.Fill = Brushes.LightBlue;
+                background.Background = Brushes.LightBlue;
 
             if (DateTime.UtcNow.Date.CompareTo(start.Date) == 0)
-                background.Fill = Brushes.LightGreen;
+                background.Background = Brushes.LightGreen;
 
             if (DateTime.UtcNow.CompareTo(start) > -1 && DateTime.UtcNow.CompareTo(end) < 1)
             {
-                background.Fill = Brushes.Red;
+                background.Background = Brushes.Red;
                 equipment.StartScheduledOutage();
             }
         }
@@ -127,8 +127,8 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
 
         protected override void OnContextMenuOpening(ContextMenuEventArgs e)
         {
-            modifyOutage.IsEnabled = deleteOutage.IsEnabled = background.Fill != Brushes.Red;
-            endOutage.IsEnabled = background.Fill == Brushes.Red;
+            modifyOutage.IsEnabled = deleteOutage.IsEnabled = background.Background != Brushes.Red;
+            endOutage.IsEnabled = background.Background == Brushes.Red;
 
             if (mode != AppMode.Slide)
                 base.OnContextMenuOpening(e);
