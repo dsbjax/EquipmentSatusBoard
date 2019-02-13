@@ -1,6 +1,7 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
 using EquipmentSatusBoard.Forms;
 using EquipmentSatusBoard.ScheduledOutageControls;
+using EquipmentSatusBoard.StatusBoardControl;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,7 @@ namespace EquipmentSatusBoard.EquipmentControls
     {
         private List<EquipmentScheduledOutage> scheduledOutages = new List<EquipmentScheduledOutage>();
         private EquipmentStatus status;
+        private bool initComplete = false;
 
         public object EquipmentName { get { return slideEquipmentLabel.Content; } }
 
@@ -33,6 +35,8 @@ namespace EquipmentSatusBoard.EquipmentControls
             adminEquipmentTextBox.GotFocus += AdminEquipmentTextBoxGotFocus;
 
             SetMenuItemTags();
+
+            initComplete = true;
         }
 
         public Equipment(string equipmentName, StreamReader statusLines)
@@ -71,6 +75,10 @@ namespace EquipmentSatusBoard.EquipmentControls
             else
                 OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
 
+            noteText.Text = statusLines.ReadLine().Replace("Equip Status Note = ", "");
+            if (noteText.Text != "")
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+
             string line;
             while(!(line = statusLines.ReadLine()).Equals("End Equipment"))
             {
@@ -106,6 +114,23 @@ namespace EquipmentSatusBoard.EquipmentControls
             adminEquipmentTextBox.GotFocus += AdminEquipmentTextBoxGotFocus;
 
             SetMenuItemTags();
+
+            initComplete = true;
+        }
+
+        private void AddEditEquipmentStatusNote()
+        {
+            var form = new EquipmentStatusNoteForm();
+            form.ShowDialog();
+
+            if (form.Note != "")
+            {
+                if (noteText.Text != "")
+                    EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + form.Note);
+                noteText.Text = form.Note;
+            }
         }
 
         internal void EndScheduledOutage()
@@ -161,15 +186,21 @@ namespace EquipmentSatusBoard.EquipmentControls
                 {
                     case EquipmentStatus.Operational:
                         equipmentStatusBackground.Fill = Brushes.Green;
+                        if (initComplete && noteText.Text != "")
+                            EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+
+                        noteText.Text = "";
                         break;
 
                     case EquipmentStatus.Degraded:
                         equipmentStatusBackground.Fill = Brushes.Orange;
+                        if (initComplete) AddEditEquipmentStatusNote();
                         break;
 
                     case EquipmentStatus.Down:
                         equipmentStatusBackground.Fill = Brushes.Red;
                         OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
+                        if (initComplete) AddEditEquipmentStatusNote();
                         break;
 
                     case EquipmentStatus.Scheduled:
@@ -221,6 +252,7 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             output += "Start Equipment: " + adminEquipmentTextBox.Text + "\n";
             output += "Eqiup Status = " + status.ToString() + ", Oper Status = " + slideTechHeader.Content.ToString() + "\n";
+            output += "Equip Status Note = " + noteText.Text + "\n";
 
             foreach (var outage in scheduledOutages)
                 output += "Schedule Outage: Start Date = " + outage.Start.ToString("MMddyyyy") +

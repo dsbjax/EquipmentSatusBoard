@@ -36,7 +36,8 @@
                                         TextAlignment="Center" FontFamily="TimesNewRoman" FontSize="16" ValueChanged="SlideIntervalValueChanged"/>
                     </StackPanel>
                 </DockPanel>
-            </DockPanel>            
+            </DockPanel> 
+            
             <UniformGrid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Height="40" Rows="1" Columns="4">
                 <Grid>
                     <Rectangle Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Green" RadiusX="5" RadiusY="5"/>
@@ -59,6 +60,8 @@
                     <Label Content="Down (See Equipment Notes)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </UniformGrid>
+            <local:EquipmentStatusScrollingMarquee x:Name="equipmentStatusMarquee" DockPanel.Dock="Bottom"/>
+
             <Grid x:Name="pages" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>

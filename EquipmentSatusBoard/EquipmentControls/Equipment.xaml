@@ -8,6 +8,9 @@
              mc:Ignorable="d">
     <Grid Margin="5">
         <Rectangle Name="equipmentStatusBackground" Width="225" Height="60" Fill="Green" Margin="0,6,0,0" RadiusX="5" RadiusY="5">
+            <Rectangle.ToolTip>
+                <TextBox Name="noteText" Text="" Background="White" MaxWidth="250" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" IsReadOnly="True" TextWrapping="Wrap"/>
+            </Rectangle.ToolTip>
             <Rectangle.Effect>
                 <DropShadowEffect/>
             </Rectangle.Effect>

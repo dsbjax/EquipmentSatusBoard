@@ -95,6 +95,9 @@
     <Compile Include="Forms\EndScheduledMaintainanceDialog.xaml.cs">
       <DependentUpon>EndScheduledMaintainanceDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EquipmentStatusNoteForm.xaml.cs">
+      <DependentUpon>EquipmentStatusNoteForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GetModePasswordDialog.xaml.cs">
       <DependentUpon>GetModePasswordDialog.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,9 @@
     <Compile Include="StatusBoardControl\EquipmentStatusPageController.xaml.cs">
       <DependentUpon>EquipmentStatusPageController.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatusBoardControl\EquipmentStatusScrollingMarquee.xaml.cs">
+      <DependentUpon>EquipmentStatusScrollingMarquee.xaml</DependentUpon>
+    </Compile>
     <Page Include="CommonControls\LabelButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\EndScheduledMaintainanceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\EquipmentStatusNoteForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatusBoardControl\EquipmentStatusPageController.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatusBoardControl\EquipmentStatusScrollingMarquee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
