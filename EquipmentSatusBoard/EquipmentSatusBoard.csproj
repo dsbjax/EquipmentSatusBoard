@@ -92,9 +92,6 @@
     <Compile Include="Forms\AppModeChangeDialog.xaml.cs">
       <DependentUpon>AppModeChangeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EndScheduledMaintainanceDialog.xaml.cs">
-      <DependentUpon>EndScheduledMaintainanceDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Forms\EquipmentStatusNoteForm.xaml.cs">
       <DependentUpon>EquipmentStatusNoteForm.xaml</DependentUpon>
     </Compile>
@@ -151,10 +148,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\CreatePasswordsDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Forms\EndScheduledMaintainanceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

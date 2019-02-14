@@ -16,6 +16,8 @@ namespace EquipmentSatusBoard.EquipmentControls
     /// </summary>
     public partial class Equipment : UserControl, IAppMode
     {
+        private const string TAG_DELIMITER = ": ";
+
         private List<EquipmentScheduledOutage> scheduledOutages = new List<EquipmentScheduledOutage>();
         private EquipmentStatus status;
         private bool initComplete = false;
@@ -25,62 +27,49 @@ namespace EquipmentSatusBoard.EquipmentControls
         internal delegate void EquipmentDeleteEventHandle(object sender, EquipmentDeleteEventArgs e);
         internal event EquipmentDeleteEventHandle EquipmentDelete;
 
+        #region Constructors
         public Equipment()
+        {
+            InitializerCommonTasks();
+
+            initComplete = true;
+        }
+
+        //Used when importing equipment from a status file
+        public Equipment(string equipmentName, StreamReader statusLines)
+        {
+            InitializerCommonTasks();
+
+            //Set equipment name on the controls used in different modes
+            slideEquipmentLabel.Content = techEquipmentLabel.Content = adminEquipmentTextBox.Text = equipmentName;
+
+            //Read in the equipment optios line and set options
+            var equipmentOptions = statusLines.ReadLine().Split(',');
+            SetImportedEquipmentStatus(equipmentOptions);
+            SetImportedOPerationalStatus(equipmentOptions);
+            SetImportedEquipmentNotes(statusLines);
+            SetImportedEquipmentScheduledOutages(statusLines);
+
+            initComplete = true;
+        }
+
+        // Equipment Initializers Start
+        private void InitializerCommonTasks()
         {
             InitializeComponent();
 
             AppModeNotifications.Subscribe(this);
             SetMode(AppMode.Slide);
 
-            adminEquipmentTextBox.GotFocus += AdminEquipmentTextBoxGotFocus;
+            adminEquipmentTextBox.GotFocus += AdminEquipmentTextBoxSelectAll;
 
             SetMenuItemTags();
-
-            initComplete = true;
         }
 
-        public Equipment(string equipmentName, StreamReader statusLines)
+        private void SetImportedEquipmentScheduledOutages(StreamReader statusLines)
         {
-            InitializeComponent();
-
-            adminEquipmentTextBox.GotFocus += AdminEquipmentTextBoxGotFocus;
-
-            SetMenuItemTags();
-
-            slideEquipmentLabel.Content = techEquipmentLabel.Content = adminEquipmentTextBox.Text = equipmentName;
-            var equipmentOptions = statusLines.ReadLine().Split(',');
-
-            string temp = equipmentOptions[0].Substring(equipmentOptions[0].LastIndexOf(' ') + 1);
-            switch (temp)
-            {
-                case "Operational":
-                    EquipmentStatusClick(operationalMenuItem, new RoutedEventArgs());
-                    break;
-
-                case "Degraded":
-                    EquipmentStatusClick(degradedMenuItem, new RoutedEventArgs());
-                    break;
-
-                case "Down":
-                    EquipmentStatusClick(unscheduledMenuItem, new RoutedEventArgs());
-                    break;
-
-                case "Scheduled":
-                    EquipmentStatusClick(scheduleMenuItem, new RoutedEventArgs());
-                    break;
-            }
-
-            if (equipmentOptions[1].Contains("On"))
-                OperationalStatusClick(onLineMenuItem, new RoutedEventArgs());
-            else
-                OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
-
-            noteText.Text = statusLines.ReadLine().Replace("Equip Status Note = ", "");
-            if (noteText.Text != "")
-                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + noteText.Text);
-
             string line;
-            while(!(line = statusLines.ReadLine()).Equals("End Equipment"))
+            while (!(line = statusLines.ReadLine()).Equals("End Equipment"))
             {
                 var outageOptions = line.Split(',');
                 var importedOutage = new ScheduledOutage()
@@ -107,51 +96,43 @@ namespace EquipmentSatusBoard.EquipmentControls
                 scheduledOutages.Add(outage);
                 ScheduledOutages.AddOutage(outage);
             }
-
-            AppModeNotifications.Subscribe(this);
-            SetMode(AppMode.Slide);
-
-            adminEquipmentTextBox.GotFocus += AdminEquipmentTextBoxGotFocus;
-
-            SetMenuItemTags();
-
-            initComplete = true;
         }
 
-        private void AddEditEquipmentStatusNote()
+        private void SetImportedEquipmentNotes(StreamReader statusLines)
         {
-            var form = new EquipmentStatusNoteForm();
-            form.ShowDialog();
+            noteText.Text = statusLines.ReadLine().Replace(Properties.Settings.Default.EquipStatsNoteHeader, null);
+            if (noteText.Text != "")
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+        }
 
-            if (form.Note != "")
+        private void SetImportedOPerationalStatus(string[] equipmentOptions)
+        {
+            if (equipmentOptions[1].Contains("On"))
+                OperationalStatusClick(onLineMenuItem, new RoutedEventArgs());
+            else
+                OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
+        }
+
+        private void SetImportedEquipmentStatus(string[] equipmentOptions)
+        {
+            switch (equipmentOptions[0].Substring(equipmentOptions[0].LastIndexOf(' ') + 1))
             {
-                if (noteText.Text != "")
-                    EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+                case "Operational":
+                    EquipmentStatusClick(operationalMenuItem, new RoutedEventArgs());
+                    break;
 
-                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + form.Note);
-                noteText.Text = form.Note;
+                case "Degraded":
+                    EquipmentStatusClick(degradedMenuItem, new RoutedEventArgs());
+                    break;
+
+                case "Down":
+                    EquipmentStatusClick(unscheduledMenuItem, new RoutedEventArgs());
+                    break;
+
+                case "Scheduled":
+                    EquipmentStatusClick(scheduleMenuItem, new RoutedEventArgs());
+                    break;
             }
-        }
-
-        internal void EndScheduledOutage()
-        {
-            EquipmentStatusClick(operationalMenuItem, new RoutedEventArgs());
-            OperationalStatusClick(onLineMenuItem, new RoutedEventArgs());
-        }
-
-        internal void RemoveOutage(EquipmentScheduledOutage outage)
-        {
-            scheduledOutages.Remove(outage);
-        }
-
-        internal void StartScheduledOutage()
-        {
-            EquipmentStatusClick(scheduleMenuItem, new RoutedEventArgs());
-        }
-
-        private void AdminEquipmentTextBoxGotFocus(object sender, RoutedEventArgs e)
-        {
-            adminEquipmentTextBox.SelectAll();
         }
 
         private void SetMenuItemTags()
@@ -164,6 +145,44 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             onLineMenuItem.Tag = OperationalStatus.OnLine;
             offLineMenuItem.Tag = OperationalStatus.OffLine;
+        }
+        #endregion
+
+        private void AddEditEquipmentStatusNote()
+        {
+            var form = new EquipmentStatusNoteForm();
+            form.ShowDialog();
+
+            if (form.Note != null)
+            {
+                if (noteText.Text != null)
+                    EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + TAG_DELIMITER + noteText.Text);
+
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + TAG_DELIMITER + form.Note);
+                noteText.Text = form.Note;
+            }
+        }
+
+        internal void EndScheduledOutage(EquipmentScheduledOutage outage)
+        {
+            EquipmentStatusClick(operationalMenuItem, new RoutedEventArgs());
+            OperationalStatusClick(onLineMenuItem, new RoutedEventArgs());
+            RemoveScheduledOutage(outage);
+        }
+
+        internal void RemoveScheduledOutage(EquipmentScheduledOutage outage)
+        {
+            scheduledOutages.Remove(outage);
+        }
+
+        internal void StartScheduledOutage()
+        {
+            EquipmentStatusClick(scheduleMenuItem, new RoutedEventArgs());
+        }
+
+        private void AdminEquipmentTextBoxSelectAll(object sender, RoutedEventArgs e)
+        {
+            adminEquipmentTextBox.SelectAll();
         }
 
         public void SetMode(AppMode newMode)

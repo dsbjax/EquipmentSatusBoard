@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentSatusBoard.Forms"
         mc:Ignorable="d"
-        Title="AppModeChangeDialog" Height="157.5" Width="492.5" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}" AllowsTransparency="True">
+        Title="AppModeChangeDialog" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="{x:Null}" AllowsTransparency="True" SizeToContent="WidthAndHeight">
     <Grid>
         <Rectangle Style="{StaticResource DialogbackGround}"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="25">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
             <Label Content="Select theApplication Mode" Style="{StaticResource DialogTitle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <UniformGrid HorizontalAlignment="Center" VerticalAlignment="Top" Columns="3" Rows="1" Margin="10" Width="400">
                 <Button Name="slide" Content="Slide" Margin="0" Width="75" HorizontalAlignment="Center" VerticalAlignment="Center" IsDefault="True" Click="SlideClick"/>

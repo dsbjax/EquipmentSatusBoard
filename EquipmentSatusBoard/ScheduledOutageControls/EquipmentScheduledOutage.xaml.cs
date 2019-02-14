@@ -159,15 +159,14 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
         private void DeleteOutageClick(object sender, RoutedEventArgs e)
         {
             ScheduledOutages.RemoveOutage(this);
-            Equipment.RemoveOutage(this);
+            Equipment.RemoveScheduledOutage(this);
         }
 
         private void EndOutage_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            equipment.EndScheduledOutage();
+            equipment.EndScheduledOutage(this);
             ScheduledOutages.RemoveOutage(this);
-            equipment.RemoveOutage(this);
         }
 
         private void TimeTextboxGotFocus(object sender, RoutedEventArgs e)

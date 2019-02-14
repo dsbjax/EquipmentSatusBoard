@@ -26,5 +26,8 @@
     <Setting Name="SavedRadarsFilename" Type="System.String" Scope="User">
       <Value Profile="(Default)">\radars.status</Value>
     </Setting>
+    <Setting Name="EquipStatsNoteHeader" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Equip Status Note = </Value>
+    </Setting>
   </Settings>
 </SettingsFile>

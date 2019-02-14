@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:EquipmentSatusBoard.Forms"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Obselete="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=Xceed.Wpf.Toolkit" x:Class="EquipmentSatusBoard.Forms.NewScheduledOutageForm"
         mc:Ignorable="d"
-        Title="NewScheduledOutageForm" Height="300" Width="450" 
+        Title="NewScheduledOutageForm" SizeToContent="WidthAndHeight"
         Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" KeyUp="WindowKeyUp">
     <Grid>
         <Rectangle Style="{StaticResource DialogbackGround}"/>
-        <StackPanel Margin="5" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Scheduled Outage" Style="{StaticResource DialogTitle}"/>
             <Label Content="All Times in ZULU" Style="{StaticResource DialogTitle}"/>
             <UniformGrid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Rows="2" Columns="1">

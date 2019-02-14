@@ -118,5 +118,17 @@ namespace EquipmentSatusBoard.Properties {
                 this["SavedRadarsFilename"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Equip Status Note = ")]
+        public string EquipStatsNoteHeader {
+            get {
+                return ((string)(this["EquipStatsNoteHeader"]));
+            }
+            set {
+                this["EquipStatsNoteHeader"] = value;
+            }
+        }
     }
 }

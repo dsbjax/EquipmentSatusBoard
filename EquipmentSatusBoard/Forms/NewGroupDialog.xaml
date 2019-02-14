@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EquipmentSatusBoard.Forms"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="EquipmentSatusBoard.Forms.NewGroupDialog"
-        mc:Ignorable="d" Height="184" Width="603" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Rectangle Style="{StaticResource DialogbackGround}"/>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
             <Label Content="Create New Equipment Group" Style="{StaticResource DialogTitle}"/>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Label Content="Group Name:" VerticalAlignment="Center"/>
