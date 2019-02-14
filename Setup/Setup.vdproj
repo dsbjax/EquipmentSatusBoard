@@ -74,6 +74,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -343,15 +351,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Equipment Status Board"
-        "ProductCode" = "8:{1EDE3433-5A3E-4F4E-91EE-7DEC67C5146D}"
-        "PackageCode" = "8:{7C4A0A5B-5B74-4D5E-B167-92FCF01B686C}"
+        "ProductCode" = "8:{F6ED32B8-CF15-4B2E-9204-C0C7F0E0ABFF}"
+        "PackageCode" = "8:{8F5DC32F-91CB-4681-9243-C1E9FB155EC0}"
         "UpgradeCode" = "8:{E9F63D3C-FE9C-4079-8DC8-07C9A5B470DD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:KBR Wyle"
         "ARPHELPTELEPHONE" = "8:(904) 542-2245"
         "ARPHELPLINK" = "8:"
@@ -893,7 +901,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7835573C4AA14F7AA85EA69ADB5F546D"
             {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\obj\\Debug\\Equipment Satus Board.exe"
+            "SourcePath" = "8:..\\EquipmentSatusBoard\\obj\\Release\\Equipment Satus Board.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"

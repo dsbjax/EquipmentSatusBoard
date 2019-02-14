@@ -24,6 +24,7 @@ namespace EquipmentSatusBoard.Forms
         public EquipmentStatusNoteForm()
         {
             InitializeComponent();
+            note.Focus();
         }
 
         private void ButtonClick(object sender, RoutedEventArgs e)

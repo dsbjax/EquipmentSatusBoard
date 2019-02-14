@@ -256,6 +256,18 @@ namespace EquipmentSatusBoard.StatusBoardControl
             deletePage.IsEnabled = SavePage.IsEnabled = saveAllPages.IsEnabled = pageCount > 0;
         }
 
+        private void SetBackgroundImageClick(object sender, RoutedEventArgs e)
+        {
+            var getImage = new OpenFileDialog();
+
+            getImage.Title = "Get Background Image";
+            getImage.ShowDialog();
+            ImageSource image = new BitmapImage(new Uri(getImage.FileName));
+            
+
+            backgroundImage.Source = image;
+        }
+
         public void LoadStatusPages()
         {
             LoadStatusPages(CURRENT_STATUS_BOARD_FILE);

@@ -61,7 +61,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
         public static void AddEquipmentStatusText(string text)
         {
             if (equipmentStatus.Text.Length > 0)
-                equipmentStatus.Text += "\t";
+                equipmentStatus.Text += " * ";
 
             equipmentStatus.Text += text;
 
@@ -75,11 +75,13 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         public static void RemoveEquipmentStatusText(string text)
         {
-            equipmentStatus.Text.Replace(text, "");
-            equipmentStatus.Text.Replace("\t\t", "\t");
+            equipmentStatus.Text = equipmentStatus.Text.Replace(text, "");
+            equipmentStatus.Text = equipmentStatus.Text.Replace(" *  * ", " * ");
+            if (equipmentStatus.Text.EndsWith(" * "))
+                equipmentStatus.Text = equipmentStatus.Text.Remove(equipmentStatus.Text.Length - 3);
 
             DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.From = -2 * equipmentStatus.ActualWidth;
+            doubleAnimation.From = -equipmentStatus.ActualWidth;
             doubleAnimation.To = marqueeCanvas.ActualWidth;
             doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
             doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:30"));

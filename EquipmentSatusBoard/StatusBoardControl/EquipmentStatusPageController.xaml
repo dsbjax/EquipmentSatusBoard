@@ -9,9 +9,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Rectangle Style="{StaticResource EquipmentControlBackground}"/>
+        <Image Name="backgroundImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100" Opacity="05"/>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15">
-            <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <Button Content="Next Page" x:Name="adminTechNextPage" Visibility="Collapsed" DockPanel.Dock="Right" Style="{x:Null}" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontFamily="Times New Roman" FontSize="16" Click="NextPageClick"/>
+            <DockPanel  DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Button Content="Next Page" x:Name="adminTechNextPage" Visibility="Visible" DockPanel.Dock="Right" Style="{x:Null}" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontFamily="Times New Roman" FontSize="16" Click="NextPageClick"/>
                 <DockPanel x:Name="adminPageControls" DockPanel.Dock="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center" LastChildFill="False">
                     <Label x:Name="adminCurrentPage" FontFamily="TimesNewRoman" FontSize="16"  Content="0" DockPanel.Dock="Right" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <Label Content=" CurrentPage:" FontFamily="TimesNewRoman" FontSize="16"  DockPanel.Dock="Right" Foreground="White" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Right"/>
@@ -25,6 +26,7 @@
                             <MenuItem Header="Save Page" Name="SavePage" Click="SavePageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                             <MenuItem Header="Save Status Board" Name="saveAllPages" Click="SaveAllPagesClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                             <Separator Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
+                            <MenuItem IsEnabled="False" Header="Set Background Image" Name="setBackgroundImage" Click="SetBackgroundImageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                             <MenuItem Header="Delete Page" Name="deletePage" Click="DeletePageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                         </MenuItem>
                     </Menu>
@@ -37,7 +39,7 @@
                     </StackPanel>
                 </DockPanel>
             </DockPanel> 
-            
+            <local:EquipmentStatusScrollingMarquee x:Name="equipmentStatusMarquee" DockPanel.Dock="Bottom"/>
             <UniformGrid DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Height="40" Rows="1" Columns="4">
                 <Grid>
                     <Rectangle Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Green" RadiusX="5" RadiusY="5"/>
@@ -60,8 +62,6 @@
                     <Label Content="Down (See Equipment Notes)" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </UniformGrid>
-            <local:EquipmentStatusScrollingMarquee x:Name="equipmentStatusMarquee" DockPanel.Dock="Bottom"/>
-
             <Grid x:Name="pages" HorizontalAlignment="Left" VerticalAlignment="Top" DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>
