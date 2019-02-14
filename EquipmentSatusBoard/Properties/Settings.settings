@@ -23,5 +23,8 @@
     <Setting Name="PasswordFilename" Type="System.String" Scope="User">
       <Value Profile="(Default)">\esbpwd.bin</Value>
     </Setting>
+    <Setting Name="SavedRadarsFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\radars.status</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

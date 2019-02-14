@@ -127,6 +127,9 @@
     <Compile Include="StatusBoardControl\EquipmentStatusScrollingMarquee.xaml.cs">
       <DependentUpon>EquipmentStatusScrollingMarquee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatusBoardControl\RadarStatusPage.xaml.cs">
+      <DependentUpon>RadarStatusPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="CommonControls\LabelButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatusBoardControl\EquipmentStatusScrollingMarquee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatusBoardControl\RadarStatusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

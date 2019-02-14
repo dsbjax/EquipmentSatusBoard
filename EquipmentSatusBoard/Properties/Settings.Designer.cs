@@ -106,5 +106,17 @@ namespace EquipmentSatusBoard.Properties {
                 this["PasswordFilename"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\radars.status")]
+        public string SavedRadarsFilename {
+            get {
+                return ((string)(this["SavedRadarsFilename"]));
+            }
+            set {
+                this["SavedRadarsFilename"] = value;
+            }
+        }
     }
 }

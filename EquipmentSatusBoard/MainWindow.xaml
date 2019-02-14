@@ -34,16 +34,17 @@
                     </Grid>
                 </Grid>
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="101*"/>
-                        <ColumnDefinition Width="49*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" Grid.ColumnSpan="2">
+
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2">
                         <Border.BorderBrush>
                             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlDarkDarkColorKey}}"/>
                         </Border.BorderBrush>
                     </Border>
-                    <EquipmentNotesControl:EquipmentNotes x:Name="equipmentNotes" Grid.ColumnSpan="2"/>
+                    <StatusBoardControl:RadarStatusPage x:Name="radarStatusControl"/>
+                    <!--
+                    <EquipmentNotesControl:EquipmentNotes x:Name="equipmentNotes" />
+                    -->
+                    
                 </Grid>
             </UniformGrid>
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DockPanel.Dock="Top">

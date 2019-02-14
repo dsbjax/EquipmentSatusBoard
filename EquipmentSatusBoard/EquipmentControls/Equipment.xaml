@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentSatusBoard.EquipmentControls"
              xmlns:CommonControls="clr-namespace:EquipmentSatusBoard.CommonControls" x:Class="EquipmentSatusBoard.EquipmentControls.Equipment"
-             mc:Ignorable="d">
-    <Grid Margin="5">
-        <Rectangle Name="equipmentStatusBackground" Width="225" Height="60" Fill="Green" Margin="0,6,0,0" RadiusX="5" RadiusY="5">
+             mc:Ignorable="d" Margin="5" Width="225" Height="60">
+    <Grid>
+        <Rectangle Name="equipmentStatusBackground" Fill="Green" Margin="0,6,0,0" RadiusX="5" RadiusY="5">
             <Rectangle.ToolTip>
-                <TextBox Name="noteText" Text="" Background="White" MaxWidth="250" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" IsReadOnly="True" TextWrapping="Wrap"/>
+                <TextBox Name="noteText" Text="" Background="White"  BorderBrush="{x:Null}" SelectionBrush="{x:Null}" IsReadOnly="True" TextWrapping="Wrap"/>
             </Rectangle.ToolTip>
             <Rectangle.Effect>
                 <DropShadowEffect/>
@@ -23,8 +23,8 @@
                 </StackPanel>
             </GroupBox.Header>
         </GroupBox>
-        <Label Name="slideEquipmentLabel" Content="Equipment" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
-        <Label Name="techEquipmentLabel" Content="Equipment" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24">
+        <Label Name="slideEquipmentLabel" Content="New" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+        <Label Name="techEquipmentLabel" Content="New" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24">
             <Label.ContextMenu>
                 <ContextMenu>
                     <Label Content="Equipment Status"/>
@@ -43,6 +43,6 @@
                 </ContextMenu>
             </Label.ContextMenu>
         </Label>
-        <TextBox Name="adminEquipmentTextBox" Text="Equipment" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontFamily="TimesNewRoman" Background="{x:Null}" BorderBrush="{x:Null}" TextChanged="AdminEquipmentTextChanged"/>
+        <TextBox Name="adminEquipmentTextBox" Text="New" Margin="0,6,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24" FontFamily="TimesNewRoman" Background="{x:Null}" BorderBrush="{x:Null}" TextChanged="AdminEquipmentTextChanged"/>
     </Grid>
 </UserControl>

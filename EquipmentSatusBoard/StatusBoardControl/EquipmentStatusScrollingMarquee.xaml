@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentSatusBoard.StatusBoardControl"
              mc:Ignorable="d">
-    <Grid>
+    <Grid Margin="5">
         <GroupBox BorderBrush="White" Foreground="White">
             <GroupBox.Header>
                 <TextBlock Text="Equipment Status Notes:" FontFamily="New Times Roman" FontSize="24"/>

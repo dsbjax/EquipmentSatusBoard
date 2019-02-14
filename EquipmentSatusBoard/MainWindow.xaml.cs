@@ -138,7 +138,8 @@ namespace EquipmentSatusBoard
         protected override void OnClosing(CancelEventArgs e)
         {
             mainStatusBar.SavePhoneNumbers();
-            equipmentNotes.SaveEquipmentNotes();
+            radarStatusControl.Save();
+            //equipmentNotes.SaveEquipmentNotes();
             statusBoard.Save();
 
             base.OnClosing(e);

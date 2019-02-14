@@ -40,13 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A3E23E144B84B99E8C374258AB7ACA77"
+        "OwnerKey" = "8:_76F74659900A66A07F29A1ECECAD8AE4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_76F74659900A66A07F29A1ECECAD8AE4"
+        "OwnerKey" = "8:_A3E23E144B84B99E8C374258AB7ACA77"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -151,11 +151,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_76F74659900A66A07F29A1ECECAD8AE4"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -182,11 +177,6 @@
             "AssemblyAsmDisplayName" = "8:Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A3E23E144B84B99E8C374258AB7ACA77"
-                    {
-                    "Name" = "8:Xceed.Wpf.Toolkit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Xceed.Wpf.Toolkit.dll"
             "TargetName" = "8:"
@@ -351,15 +341,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Equipment Status Board"
-        "ProductCode" = "8:{F6ED32B8-CF15-4B2E-9204-C0C7F0E0ABFF}"
-        "PackageCode" = "8:{8F5DC32F-91CB-4681-9243-C1E9FB155EC0}"
+        "ProductCode" = "8:{D90FEE6E-AE5A-47ED-83A8-B610EDCAD7E8}"
+        "PackageCode" = "8:{B59813DF-3F55-40FB-BECF-D3C8057F2DF6}"
         "UpgradeCode" = "8:{E9F63D3C-FE9C-4079-8DC8-07C9A5B470DD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:KBR Wyle"
         "ARPHELPTELEPHONE" = "8:(904) 542-2245"
         "ARPHELPLINK" = "8:"
