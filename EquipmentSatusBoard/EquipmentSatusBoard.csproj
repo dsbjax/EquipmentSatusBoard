@@ -76,6 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommonControls\ErrorLogger.cs" />
     <Compile Include="CommonControls\LabelButton.xaml.cs">
       <DependentUpon>LabelButton.xaml</DependentUpon>
     </Compile>
@@ -126,6 +127,9 @@
     </Compile>
     <Compile Include="StatusBoardControl\RadarStatusPage.xaml.cs">
       <DependentUpon>RadarStatusPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatusBoardControl\StatusPage.xaml.cs">
+      <DependentUpon>StatusPage.xaml</DependentUpon>
     </Compile>
     <Page Include="CommonControls\LabelButton.xaml">
       <SubType>Designer</SubType>
@@ -209,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StatusBoardControl\RadarStatusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatusBoardControl\StatusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

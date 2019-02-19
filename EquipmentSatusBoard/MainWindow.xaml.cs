@@ -7,6 +7,7 @@ using EquipmentSatusBoard.Forms;
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using EquipmentSatusBoard.CommonControls;
 
 namespace EquipmentSatusBoard
 {
@@ -34,8 +35,43 @@ namespace EquipmentSatusBoard
             AppModeNotifications.Subscribe(this);
 
             Events();
-            statusBoard.LoadStatusPages();
             appModeNotifications.Broadcast(AppMode.Slide);
+        }
+
+        private AppModePassword[] LoadPasswords()
+        {
+            if (!File.Exists(PASSWORD_FILE))
+                return CreatePasswords();
+
+            AppModePassword[] passwords = new AppModePassword[2];
+
+            try
+            {
+                using (FileStream reader = new FileStream(PASSWORD_FILE, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] adminPassword = new byte[32];
+                    byte[] techPassword = new byte[32];
+
+                    reader.Read(adminPassword, 0, PASSWORD_BYTE_SIZE);
+                    reader.Read(techPassword, 0, PASSWORD_BYTE_SIZE);
+                    reader.Close();
+
+                    passwords[0] = new AppModePassword() { Mode = AppMode.Admin, Password = adminPassword };
+                    passwords[1] = new AppModePassword() { Mode = AppMode.Tech, Password = techPassword };
+                }
+            }catch(Exception e)
+            {
+                StringBuilder errorMeassage = new StringBuilder();
+
+                errorMeassage.AppendLine("Error Loading Passwords");
+                errorMeassage.AppendLine(e.Message);
+                errorMeassage.AppendLine(e.Source);
+                errorMeassage.AppendLine(e.StackTrace);
+
+                ErrorLogger.LogError("Error Loading Passwords", e);
+            }
+
+            return passwords;
         }
 
         private void Events()
@@ -69,28 +105,6 @@ namespace EquipmentSatusBoard
             return match;
         }
 
-        private AppModePassword[] LoadPasswords()
-        {
-            if (!File.Exists(PASSWORD_FILE))
-                return CreatePasswords();
-
-            AppModePassword[] passwords = new AppModePassword[2];
-
-            using (FileStream reader = new FileStream(PASSWORD_FILE, FileMode.Open, FileAccess.Read))
-            {
-                byte[] adminPassword = new byte[32];
-                byte[] techPassword = new byte[32];
-
-                reader.Read(adminPassword, 0, PASSWORD_BYTE_SIZE);
-                reader.Read(techPassword, 0, PASSWORD_BYTE_SIZE);
-                reader.Close();
-
-                passwords[0] = new AppModePassword() { Mode = AppMode.Admin, Password = adminPassword };
-                passwords[1] = new AppModePassword() { Mode = AppMode.Tech, Password = techPassword };
-            }
-
-            return passwords;
-        }
 
         private AppModePassword[] CreatePasswords()
         {

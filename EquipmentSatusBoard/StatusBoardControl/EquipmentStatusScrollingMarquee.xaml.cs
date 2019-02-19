@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EquipmentSatusBoard.StatusBoardControl
 {
@@ -21,6 +11,8 @@ namespace EquipmentSatusBoard.StatusBoardControl
     /// </summary>
     public partial class EquipmentStatusScrollingMarquee : UserControl
     {
+        private const string DELIMITOR = "  *  ";
+
         private static TextBlock equipmentStatus = new TextBlock()
         {
             FontFamily = new FontFamily("Times New Roman"),
@@ -61,7 +53,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
         public static void AddEquipmentStatusText(string text)
         {
             if (equipmentStatus.Text.Length > 0)
-                equipmentStatus.Text += " * ";
+                equipmentStatus.Text += DELIMITOR;
 
             equipmentStatus.Text += text;
 
@@ -75,10 +67,10 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         public static void RemoveEquipmentStatusText(string text)
         {
-            equipmentStatus.Text = equipmentStatus.Text.Replace(text, "");
-            equipmentStatus.Text = equipmentStatus.Text.Replace(" *  * ", " * ");
-            if (equipmentStatus.Text.EndsWith(" * "))
-                equipmentStatus.Text = equipmentStatus.Text.Remove(equipmentStatus.Text.Length - 3);
+            equipmentStatus.Text = equipmentStatus.Text.Replace(text, null);
+            equipmentStatus.Text = equipmentStatus.Text.Replace(DELIMITOR + DELIMITOR, DELIMITOR);
+            if (equipmentStatus.Text.EndsWith(DELIMITOR))
+                equipmentStatus.Text = equipmentStatus.Text.Remove(equipmentStatus.Text.Length - DELIMITOR.Length);
 
             DoubleAnimation doubleAnimation = new DoubleAnimation();
             doubleAnimation.From = -equipmentStatus.ActualWidth;

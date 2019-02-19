@@ -130,5 +130,17 @@ namespace EquipmentSatusBoard.Properties {
                 this["EquipStatsNoteHeader"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\errorlog")]
+        public string ErrorLogFilename {
+            get {
+                return ((string)(this["ErrorLogFilename"]));
+            }
+            set {
+                this["ErrorLogFilename"] = value;
+            }
+        }
     }
 }

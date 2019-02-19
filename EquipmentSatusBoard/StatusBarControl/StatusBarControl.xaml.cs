@@ -59,7 +59,9 @@ namespace EquipmentSatusBoard.StatusBarControl
             }
 
             modeChangeRequest.Content = "Mode: " + newMode.ToString();
-//            Focus();
+
+            if (newMode == AppMode.Slide)
+                SavePhoneNumbers();
         }
 
         private void TimerTick(object sender, EventArgs e)

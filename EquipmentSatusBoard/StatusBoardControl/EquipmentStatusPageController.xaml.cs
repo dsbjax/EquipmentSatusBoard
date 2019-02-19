@@ -1,4 +1,5 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
+using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.EquipmentControls;
 using Microsoft.Win32;
 using System;
@@ -45,7 +46,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
             AppModeNotifications.Subscribe(this);
             timer.Tick += TimerTick;
 
-            SetMode(AppMode.Slide);
+            LoadStatusPages();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -104,6 +105,9 @@ namespace EquipmentSatusBoard.StatusBoardControl
             }
             else
                 timer.Stop();
+
+            if (newMode == AppMode.Slide)
+                Save();
         }
 
         public void Save()
@@ -164,31 +168,37 @@ namespace EquipmentSatusBoard.StatusBoardControl
                     {
                         line = statusLines.ReadLine();
 
-                        if (line.StartsWith("Page Start"))
+                        try
                         {
-                            StackPanel panel = new StackPanel()
+                            if (line.StartsWith("Page Start"))
                             {
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Center,
-                                Orientation = Orientation.Vertical
-                            };
+                                StackPanel panel = new StackPanel()
+                                {
+                                    HorizontalAlignment = HorizontalAlignment.Center,
+                                    VerticalAlignment = VerticalAlignment.Center,
+                                    Orientation = Orientation.Vertical
+                                };
 
-                            while ((line = statusLines.ReadLine()).StartsWith("Start Group:"))
-                            {
-                                var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
-                                group.EquipmentGroupDelete += GroupDelete;
+                                while ((line = statusLines.ReadLine()).StartsWith("Start Group:"))
+                                {
+                                    var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
+                                    group.EquipmentGroupDelete += GroupDelete;
 
-                                panel.Children.Add(group);
+                                    panel.Children.Add(group);
 
+                                }
+
+                                foreach (var page in pages.Children)
+                                    ((StackPanel)page).Visibility = Visibility.Collapsed;
+
+                                panel.Visibility = Visibility.Visible;
+                                pages.Children.Add(panel);
+
+                                adminCurrentPage.Content = adminPageCount.Content = pageCount = currentPage = pages.Children.Count;
                             }
-
-                            foreach (var page in pages.Children)
-                                ((StackPanel)page).Visibility = Visibility.Collapsed;
-
-                            panel.Visibility = Visibility.Visible;
-                            pages.Children.Add(panel);
-
-                            adminCurrentPage.Content = adminPageCount.Content = pageCount = currentPage = pages.Children.Count;
+                        }catch(Exception e)
+                        {
+                            ErrorLogger.LogError("Error Creating Status Page", e);
                         }
                     }
                 }

@@ -29,5 +29,8 @@
     <Setting Name="EquipStatsNoteHeader" Type="System.String" Scope="User">
       <Value Profile="(Default)">Equip Status Note = </Value>
     </Setting>
+    <Setting Name="ErrorLogFilename" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\errorlog</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
