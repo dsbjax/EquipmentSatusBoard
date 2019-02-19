@@ -30,7 +30,7 @@
       <Value Profile="(Default)">Equip Status Note = </Value>
     </Setting>
     <Setting Name="ErrorLogFilename" Type="System.String" Scope="User">
-      <Value Profile="(Default)">\errorlog</Value>
+      <Value Profile="(Default)">\errorlog.txt</Value>
     </Setting>
   </Settings>
 </SettingsFile>

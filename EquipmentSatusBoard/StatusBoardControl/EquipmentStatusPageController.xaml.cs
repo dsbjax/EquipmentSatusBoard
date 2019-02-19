@@ -3,20 +3,11 @@ using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.EquipmentControls;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace EquipmentSatusBoard.StatusBoardControl
@@ -120,13 +111,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
             string output = "";
 
             foreach (var page in pages.Children)
-            {
-                output += "Page Start\n";
-                foreach (var item in ((StackPanel)page).Children)
-                    output += item.ToString();
-
-                output += "Page End\n";
-            }
+                output += page.ToString();
 
             using (StreamWriter writer = new StreamWriter(filename))
                 writer.Write(output);
@@ -172,27 +157,13 @@ namespace EquipmentSatusBoard.StatusBoardControl
                         {
                             if (line.StartsWith("Page Start"))
                             {
-                                StackPanel panel = new StackPanel()
-                                {
-                                    HorizontalAlignment = HorizontalAlignment.Center,
-                                    VerticalAlignment = VerticalAlignment.Center,
-                                    Orientation = Orientation.Vertical
-                                };
-
-                                while ((line = statusLines.ReadLine()).StartsWith("Start Group:"))
-                                {
-                                    var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
-                                    group.EquipmentGroupDelete += GroupDelete;
-
-                                    panel.Children.Add(group);
-
-                                }
+                                var statusPage = new StatusPage(statusLines);
 
                                 foreach (var page in pages.Children)
-                                    ((StackPanel)page).Visibility = Visibility.Collapsed;
+                                    ((StatusPage)page).Visibility = Visibility.Collapsed;
 
-                                panel.Visibility = Visibility.Visible;
-                                pages.Children.Add(panel);
+                                statusPage.Visibility = Visibility.Visible;
+                                pages.Children.Add(statusPage);
 
                                 adminCurrentPage.Content = adminPageCount.Content = pageCount = currentPage = pages.Children.Count;
                             }
@@ -272,10 +243,8 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
             getImage.Title = "Get Background Image";
             getImage.ShowDialog();
-            ImageSource image = new BitmapImage(new Uri(getImage.FileName));
-            
 
-            backgroundImage.Source = image;
+            ((StatusPage)pages.Children[currentPage - 1]).SetBackgroundImage(getImage.FileName);
         }
 
         public void LoadStatusPages()

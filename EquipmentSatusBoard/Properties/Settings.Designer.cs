@@ -133,7 +133,7 @@ namespace EquipmentSatusBoard.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\\errorlog")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\errorlog.txt")]
         public string ErrorLogFilename {
             get {
                 return ((string)(this["ErrorLogFilename"]));

@@ -7,5 +7,6 @@
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid>
         <Image Name="backgroundImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100"/>
+        <DockPanel Name="page" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" LastChildFill="False"/>
     </Grid>
 </UserControl>

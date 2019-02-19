@@ -11,7 +11,8 @@ namespace EquipmentSatusBoard.CommonControls
     {
         internal static void LogError(string errorMessage, Exception e)
         {
-            string errorFile = Properties.Settings.Default.AppDataFolder + Properties.Settings.Default.ErrorLogFilename;
+            string errorFile = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                Properties.Settings.Default.AppDataFolder + Properties.Settings.Default.ErrorLogFilename;
 
             using (StreamWriter writer = new StreamWriter(errorFile, true))
             {

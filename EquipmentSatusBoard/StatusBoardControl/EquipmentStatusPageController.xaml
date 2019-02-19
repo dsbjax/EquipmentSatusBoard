@@ -26,7 +26,7 @@
                             <MenuItem Header="Save Page" Name="SavePage" Click="SavePageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                             <MenuItem Header="Save Status Board" Name="saveAllPages" Click="SaveAllPagesClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                             <Separator Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
-                            <MenuItem IsEnabled="False" Header="Set Background Image" Name="setBackgroundImage" Click="SetBackgroundImageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
+                            <MenuItem Header="Set Background Image" Name="setBackgroundImage" Click="SetBackgroundImageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                             <MenuItem Header="Delete Page" Name="deletePage" Click="DeletePageClick" Foreground="Black" FontFamily="{DynamicResource {x:Static SystemFonts.MenuFontFamilyKey}}" FontSize="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}"/>
                         </MenuItem>
                     </Menu>
