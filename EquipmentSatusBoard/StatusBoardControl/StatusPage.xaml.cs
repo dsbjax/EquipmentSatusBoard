@@ -22,6 +22,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
     /// </summary>
     public partial class StatusPage : UserControl
     {
+        internal bool HasBackgroundImage {  get { return backgroundImage.Source != null; } }
         private string backgroundImageFilename = "";
 
         public StatusPage()
@@ -66,6 +67,12 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         internal void SetBackgroundImage(string filename)
         {
+            if (filename == null)
+            {
+                backgroundImage.Source = null;
+                return;
+            }
+
             backgroundImageFilename = filename;
 
             if (File.Exists(backgroundImageFilename))

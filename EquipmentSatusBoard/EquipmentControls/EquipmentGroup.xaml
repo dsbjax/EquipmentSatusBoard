@@ -16,7 +16,7 @@
             </GroupBox.Header>
             <DockPanel>
                 <Menu DockPanel.Dock="Top" Background="{x:Null}">
-                    <MenuItem Name="adminMenu" Header="Modify Equipment Group" Foreground="White">
+                    <MenuItem Name="adminMenu" Header="Modify Equipment Group" Foreground="White" SubmenuOpened="AdminMenu_SubmenuOpened">
                         <MenuItem Name="addEquipmentGroup" Header="Add Equipment Group" Foreground="Black" Click="AddEquipmentGroupClick"/>
                         <MenuItem Name="addEquipment" Header="Add Equipment" Foreground="Black" Click="AddEquipmentClick"/>
                         <Separator/>

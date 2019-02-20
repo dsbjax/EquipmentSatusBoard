@@ -3,19 +3,10 @@ using EquipmentSatusBoard.Forms;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EquipmentSatusBoard.EquipmentControls
 {
@@ -117,7 +108,19 @@ namespace EquipmentSatusBoard.EquipmentControls
         private void AdminDeleteButtonClick(object sender, RoutedEventArgs e)
         {
             if (EquipmentGroupDelete != null)
+            {
+                foreach (var item in wrapGroupPanel.Children)
+                    AppModeNotifications.Unsubscribe((IAppMode)item);
+
+                foreach (var item in noWrapGroupPanel.Children)
+                    AppModeNotifications.Unsubscribe((IAppMode)item);
+
+                wrapGroupPanel.Children.Clear();
+                noWrapGroupPanel.Children.Clear();
+                AppModeNotifications.Unsubscribe(this);
+
                 EquipmentGroupDelete.Invoke(this, new EquipmentGroupDeleteEventArgs() { EquipmentGroup = this });
+            }
         }
 
         private void GroupDelete(object sender, EquipmentGroupDeleteEventArgs e)
@@ -239,6 +242,12 @@ namespace EquipmentSatusBoard.EquipmentControls
                 wrapGroupPanel.Visibility = wrapGroupPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
             else
                 noWrapGroupPanel.Visibility = noWrapGroupPanel.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        private void AdminMenu_SubmenuOpened(object sender, RoutedEventArgs e)
+        {
+            isWrap.IsChecked = wrap;
+            isHorizontal.IsChecked = horizontal;
         }
 
         private UIElementCollection ActivePanel()

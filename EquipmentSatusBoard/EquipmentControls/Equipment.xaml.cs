@@ -46,7 +46,7 @@ namespace EquipmentSatusBoard.EquipmentControls
             //Read in the equipment optios line and set options
             var equipmentOptions = statusLines.ReadLine().Split(',');
             SetImportedEquipmentStatus(equipmentOptions);
-            SetImportedOPerationalStatus(equipmentOptions);
+            SetImportedOperationalStatus(equipmentOptions);
             SetImportedEquipmentNotes(statusLines);
             SetImportedEquipmentScheduledOutages(statusLines);
 
@@ -105,7 +105,7 @@ namespace EquipmentSatusBoard.EquipmentControls
                 EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + noteText.Text);
         }
 
-        private void SetImportedOPerationalStatus(string[] equipmentOptions)
+        private void SetImportedOperationalStatus(string[] equipmentOptions)
         {
             if (equipmentOptions[1].Contains("On"))
                 OperationalStatusClick(onLineMenuItem, new RoutedEventArgs());
@@ -262,7 +262,10 @@ namespace EquipmentSatusBoard.EquipmentControls
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
             if (EquipmentDelete != null)
+            {
+                AppModeNotifications.Unsubscribe(this);
                 EquipmentDelete.Invoke(this, new EquipmentDeleteEventArgs() { Equipment = this });
+            }
         }
 
         public override string ToString()

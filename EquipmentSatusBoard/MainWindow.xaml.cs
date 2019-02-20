@@ -16,62 +16,65 @@ namespace EquipmentSatusBoard
     /// </summary>
     public partial class MainWindow : Window, IAppMode
     {
-        private static string PASSWORD_FOLDER =
+        private static string SAVED_PASSWORDS_FOLDER =
             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
             Properties.Settings.Default.AppDataFolder;
 
-        private static string PASSWORD_FILE = PASSWORD_FOLDER + Properties.Settings.Default.PasswordFilename;
+        private static string SAVED_PASSWORDS_FILE = 
+            SAVED_PASSWORDS_FOLDER + Properties.Settings.Default.PasswordFilename;
 
         private const int PASSWORD_BYTE_SIZE = 32;
 
-        private AppModeNotifications appModeNotifications = new AppModeNotifications();
-        private AppModePassword[] passwords;
+        private AppModeNotifications modeChangeNotifications = new AppModeNotifications();
+        private AppModePassword[] savedPasswords;
 
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            passwords = LoadPasswords();
-            AppModeNotifications.Subscribe(this);
+                savedPasswords = LoadPasswords();
+                AppModeNotifications.Subscribe(this);
 
-            Events();
-            appModeNotifications.Broadcast(AppMode.Slide);
+                Events();
+                modeChangeNotifications.Broadcast(AppMode.Slide);
+
+            }catch(Exception e)
+            {
+                ErrorLogger.LogError("Error Initializing Main Window, MainWindow()", e);
+                Close();
+            }
         }
 
         private AppModePassword[] LoadPasswords()
         {
-            if (!File.Exists(PASSWORD_FILE))
+            if (!File.Exists(SAVED_PASSWORDS_FILE))
                 return CreatePasswords();
 
-            AppModePassword[] passwords = new AppModePassword[2];
+            AppModePassword[] passwordsFromFile = new AppModePassword[2];
 
             try
             {
-                using (FileStream reader = new FileStream(PASSWORD_FILE, FileMode.Open, FileAccess.Read))
+                using (FileStream passwordsReader = new FileStream(SAVED_PASSWORDS_FILE, FileMode.Open, FileAccess.Read))
                 {
                     byte[] adminPassword = new byte[32];
                     byte[] techPassword = new byte[32];
 
-                    reader.Read(adminPassword, 0, PASSWORD_BYTE_SIZE);
-                    reader.Read(techPassword, 0, PASSWORD_BYTE_SIZE);
-                    reader.Close();
+                    passwordsReader.Read(adminPassword, 0, PASSWORD_BYTE_SIZE);
+                    passwordsReader.Read(techPassword, 0, PASSWORD_BYTE_SIZE);
+                    passwordsReader.Close();
 
-                    passwords[0] = new AppModePassword() { Mode = AppMode.Admin, Password = adminPassword };
-                    passwords[1] = new AppModePassword() { Mode = AppMode.Tech, Password = techPassword };
+                    passwordsFromFile[0] = new AppModePassword() { Mode = AppMode.Admin, Password = adminPassword };
+                    passwordsFromFile[1] = new AppModePassword() { Mode = AppMode.Tech, Password = techPassword };
                 }
             }catch(Exception e)
             {
-                StringBuilder errorMeassage = new StringBuilder();
-
-                errorMeassage.AppendLine("Error Loading Passwords");
-                errorMeassage.AppendLine(e.Message);
-                errorMeassage.AppendLine(e.Source);
-                errorMeassage.AppendLine(e.StackTrace);
-
-                ErrorLogger.LogError("Error Loading Passwords", e);
+                ErrorLogger.LogError("Error Loading Passwords, MainWindow.LoadPasswords()", e);
+                throw e;
             }
 
-            return passwords;
+            return passwordsFromFile;
         }
 
         private void Events()
@@ -84,7 +87,7 @@ namespace EquipmentSatusBoard
             var dialog = new AppModeChangeDialog();
 
             if (ValidatePassword(dialog.GetModeRequest()))
-                appModeNotifications.Broadcast(dialog.NewMode);
+                modeChangeNotifications.Broadcast(dialog.NewMode);
         }
 
         private bool ValidatePassword(AppMode appMode)
@@ -92,15 +95,27 @@ namespace EquipmentSatusBoard
             if (appMode == AppMode.Slide) return true;
 
             var dialog = new GetModePasswordDialog();
-
             SHA256 hash = SHA256.Create();
-            byte[] password = hash.ComputeHash(Encoding.UTF8.GetBytes(dialog.ShowDialog(appMode)));
-
+            byte[] password;
             bool match = true;
-            for (int i = 0; i < PASSWORD_BYTE_SIZE; i++)
-                match &= passwords[appMode == AppMode.Admin ? 0 : 1].Password[i] == password[i];
 
-            if (!match) new IncorrectPasswordDialog().ShowDialog();
+            try
+            {
+                password = hash.ComputeHash(Encoding.UTF8.GetBytes(dialog.ShowDialog(appMode)));
+
+                if (password.Length != PASSWORD_BYTE_SIZE || savedPasswords[0].Password.Length != PASSWORD_BYTE_SIZE || savedPasswords[1].Password.Length != PASSWORD_BYTE_SIZE)
+                    return false;
+
+                for (int i = 0; i < PASSWORD_BYTE_SIZE; i++)
+                    match &= savedPasswords[appMode == AppMode.Admin ? 0 : 1].Password[i] == password[i];
+
+                if (!match) new IncorrectPasswordDialog().ShowDialog();
+            }
+            catch (Exception e)
+            {
+                ErrorLogger.LogError("Error Validating Password, MainWIndow.ValidatePassword(AppMode)", e);
+                return false;
+            }
 
             return match;
         }
@@ -108,36 +123,48 @@ namespace EquipmentSatusBoard
 
         private AppModePassword[] CreatePasswords()
         {
-            var dialog = new CreatePasswordsDialog();
+            try
+            {
+                var dialog = new CreatePasswordsDialog();
 
-            if((bool)dialog.ShowDialog())
-                using (SHA256 hash = SHA256.Create())
-                {
-                    byte[] adminPassword = new byte[32], techPassword = new byte[32];
-                    AppModePassword[] passwords = new AppModePassword[2];
+                if ((bool)dialog.ShowDialog())
+                    using (SHA256 hash = SHA256.Create())
+                    {
+                        byte[] adminPassword = new byte[32], techPassword = new byte[32];
+                        AppModePassword[] passwords = new AppModePassword[2];
 
-                    adminPassword = hash.ComputeHash(Encoding.UTF8.GetBytes(dialog.AdminPassword));
-                    techPassword = hash.ComputeHash(Encoding.UTF8.GetBytes(dialog.TechPassword));
+                        adminPassword = hash.ComputeHash(Encoding.UTF8.GetBytes(dialog.AdminPassword));
+                        techPassword = hash.ComputeHash(Encoding.UTF8.GetBytes(dialog.TechPassword));
 
-                    passwords[0] = new AppModePassword() { Mode = AppMode.Admin, Password = adminPassword };
-                    passwords[1] = new AppModePassword() { Mode = AppMode.Tech, Password = techPassword };
+                        passwords[0] = new AppModePassword() { Mode = AppMode.Admin, Password = adminPassword };
+                        passwords[1] = new AppModePassword() { Mode = AppMode.Tech, Password = techPassword };
 
-                    SavePassword(passwords);
+                        SavePasswords(passwords);
 
-                    return passwords;
-                }
+                        return passwords;
+                    }
+            }catch(Exception e)
+            {
+                ErrorLogger.LogError("Error Creating Passwords, MainWindow.CreatePasswords", e);
+            }
 
             return null;
         }
 
-        private void SavePassword(AppModePassword[] passwords)
+        private void SavePasswords(AppModePassword[] passwords)
         {
-            if (!Directory.Exists(PASSWORD_FOLDER)) Directory.CreateDirectory(PASSWORD_FOLDER);
-            using (FileStream writer = new FileStream(PASSWORD_FILE, FileMode.Create, FileAccess.Write))
+            try
             {
-                writer.Write(passwords[0].Password, 0, PASSWORD_BYTE_SIZE);
-                writer.Write(passwords[1].Password, 0, PASSWORD_BYTE_SIZE);
-                writer.Close();
+                if (!Directory.Exists(SAVED_PASSWORDS_FOLDER)) Directory.CreateDirectory(SAVED_PASSWORDS_FOLDER);
+                using (FileStream writer = new FileStream(SAVED_PASSWORDS_FILE, FileMode.Create, FileAccess.Write))
+                {
+                    writer.Write(passwords[0].Password, 0, PASSWORD_BYTE_SIZE);
+                    writer.Write(passwords[1].Password, 0, PASSWORD_BYTE_SIZE);
+                    writer.Close();
+                }
+            }catch(Exception e)
+            {
+                ErrorLogger.LogError("Error Saving Passswords, MainWindow.SavePasswords(AppModePassword[])", e);
             }
         }
 
@@ -153,16 +180,28 @@ namespace EquipmentSatusBoard
         {
             mainStatusBar.SavePhoneNumbers();
             radarStatusControl.Save();
-            //equipmentNotes.SaveEquipmentNotes();
             statusBoard.Save();
 
             base.OnClosing(e);
         }
 
-        private void CheckForQuit(object sender, System.Windows.Input.KeyEventArgs e)
+        protected override void OnKeyDown(KeyEventArgs e)
         {
             if (e.Key == Key.X && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
                 Close();
+
+            if (e.Key == Key.Escape)
+                modeChangeNotifications.Broadcast(AppMode.Slide);
+
+            if (e.Key == Key.F2)
+                if (ValidatePassword(AppMode.Tech))
+                    modeChangeNotifications.Broadcast(AppMode.Tech);
+
+            if (e.Key == Key.F3)
+                if (ValidatePassword(AppMode.Admin))
+                    modeChangeNotifications.Broadcast(AppMode.Admin);
+
+            base.OnKeyDown(e);
         }
     }
 }

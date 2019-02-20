@@ -4,26 +4,32 @@ namespace EquipmentSatusBoard.AppModeControls
 {
     internal class AppModeNotifications
     {
-        private static List<IAppMode> subscribers;
+        private static List<IAppMode> modeNotificationSubscribers;
 
         internal AppModeNotifications()
         {
-            if (subscribers == null)
-                subscribers = new List<IAppMode>();
+            if (modeNotificationSubscribers == null)
+                modeNotificationSubscribers = new List<IAppMode>();
         }
 
         internal static void Subscribe(IAppMode subscriber)
         {
-            if (subscribers == null)
-                subscribers = new List<IAppMode>();
+            if (modeNotificationSubscribers == null)
+                modeNotificationSubscribers = new List<IAppMode>();
 
-            subscribers.Add(subscriber);
+            modeNotificationSubscribers.Add(subscriber);
+        }
+
+        internal static void Unsubscribe(IAppMode subscriber)
+        {
+            if (modeNotificationSubscribers != null)
+                modeNotificationSubscribers.Remove(subscriber);
         }
 
         internal void Broadcast(AppMode mode)
         {
-            foreach (var subscriber in subscribers)
-                subscriber.SetMode(mode);
+            foreach (var modeNotificationSubscriber in modeNotificationSubscribers)
+                modeNotificationSubscriber.SetMode(mode);
         }
     }
 }

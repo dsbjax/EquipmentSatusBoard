@@ -235,6 +235,8 @@ namespace EquipmentSatusBoard.StatusBoardControl
         private void PageMenuSubmenuOpened(object sender, RoutedEventArgs e)
         {
             deletePage.IsEnabled = SavePage.IsEnabled = saveAllPages.IsEnabled = pageCount > 0;
+            deleteBackgroundImage.IsEnabled = deletePage.IsEnabled && 
+                ((StatusPage)pages.Children[currentPage - 1]).HasBackgroundImage;
         }
 
         private void SetBackgroundImageClick(object sender, RoutedEventArgs e)
@@ -245,6 +247,11 @@ namespace EquipmentSatusBoard.StatusBoardControl
             getImage.ShowDialog();
 
             ((StatusPage)pages.Children[currentPage - 1]).SetBackgroundImage(getImage.FileName);
+        }
+
+        private void DeleteBackgroundImageClick(object sender, RoutedEventArgs e)
+        {
+            ((StatusPage)pages.Children[currentPage - 1]).SetBackgroundImage(null);
         }
 
         public void LoadStatusPages()

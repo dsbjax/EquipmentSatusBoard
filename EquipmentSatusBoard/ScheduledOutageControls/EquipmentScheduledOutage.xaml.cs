@@ -1,6 +1,7 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
 using EquipmentSatusBoard.EquipmentControls;
 using EquipmentSatusBoard.Forms;
+using EquipmentSatusBoard.StatusBoardControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
     public partial class EquipmentScheduledOutage : UserControl, IComparable<EquipmentScheduledOutage>, IAppMode
     {
         private DispatcherTimer timer = new DispatcherTimer();
+        private string statusNote;
 
         private DateTime start;
         public DateTime Start
@@ -102,16 +104,24 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
 
         private void TimerTick(object sender, EventArgs e)
         {
-            if (DateTime.UtcNow.Date.CompareTo(start.Date) > 0)
+            if (background.Background != Brushes.LightBlue && DateTime.UtcNow.Date.CompareTo(start.Date) > 0)
                 background.Background = Brushes.LightBlue;
 
-            if (DateTime.UtcNow.Date.CompareTo(start.Date) == 0)
+            if (background.Background != Brushes.LightGreen && DateTime.UtcNow.Date.CompareTo(start.Date) == 0)
                 background.Background = Brushes.LightGreen;
 
-            if (DateTime.UtcNow.CompareTo(start) > -1 && DateTime.UtcNow.CompareTo(end) < 1)
+            if (background.Background != Brushes.Red && (DateTime.UtcNow.CompareTo(start) > -1 && DateTime.UtcNow.CompareTo(end) < 1))
             {
                 background.Background = Brushes.Red;
                 equipment.StartScheduledOutage();
+
+                statusNote = equipment.EquipmentName + ": ";
+                statusNote += Notes + " ";
+                statusNote += (Start.Date.Equals(End.Date) ? Start.ToString("HHmm") : Start.ToString("MM/dd HHmm"))+ " to ";
+                statusNote += Start.Date.Equals(End.Date) ? End.ToString("HHmm") : End.ToString("MM/dd HHmm");
+
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(statusNote);
+                timer.Stop();
             }
         }
 
@@ -167,6 +177,7 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
             timer.Stop();
             equipment.EndScheduledOutage(this);
             ScheduledOutages.RemoveOutage(this);
+            EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(statusNote);
         }
 
         private void TimeTextboxGotFocus(object sender, RoutedEventArgs e)
