@@ -7,36 +7,33 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:Obselete="clr-namespace:Xceed.Wpf.Toolkit.Obselete;assembly=Xceed.Wpf.Toolkit" x:Class="EquipmentSatusBoard.Forms.NewScheduledOutageForm"
         mc:Ignorable="d"
         Title="NewScheduledOutageForm" SizeToContent="WidthAndHeight"
-        Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" KeyUp="WindowKeyUp">
+        Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Rectangle Style="{StaticResource DialogbackGround}"/>
         <StackPanel Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Scheduled Outage" Style="{StaticResource DialogTitle}"/>
-            <Label Content="All Times in ZULU" Style="{StaticResource DialogTitle}"/>
             <UniformGrid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" Rows="2" Columns="1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 5">
                     <Label Content="Outage Start Date:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <DatePicker Name="startDate" VerticalAlignment="Center" Width="125" CalendarStyle="{x:Null}" FirstDayOfWeek="Saturday"
                                 HorizontalContentAlignment="Stretch" FontFamily="Times New Roman" FontSize="16" SelectedDateChanged="StartDateChanged"/>
-                    <Label Content="Time:"/>
-                    <local:TimeTextBox x:Name="startTime" Width="75" Text="HHMM" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                       FontSize="16" FontFamily="Times New Roman" TextAlignment="Center" GotFocus="TimeTextBoxGotFocus"/>
+                    <Label Content="Time:" VerticalAlignment="Center"/>
+                    <local:SelectTimeDropList x:Name="startTime"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin=" 5">
                     <Label Content="Outage End Date:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <DatePicker Name="endDate" VerticalAlignment="Center" Width="125" CalendarStyle="{x:Null}" FirstDayOfWeek="Saturday"
                                 HorizontalContentAlignment="Stretch" FontFamily="Times New Roman" FontSize="16" />
-                    <Label Content="Time:"/>
-                    <local:TimeTextBox x:Name="endTime" Width="75" Text="HHMM" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                       FontSize="16" FontFamily="Times New Roman" TextAlignment="Center" GotFocus="TimeTextBoxGotFocus"/>
+                    <Label Content="Time:" VerticalAlignment="Center"/>
+                    <local:SelectTimeDropList x:Name="endTime"/>
                 </StackPanel>
             </UniformGrid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label VerticalAlignment="Center" Content="Notes:"/>
-                <TextBox x:Name="notes" VerticalAlignment="Center" Width="200" MaxLength="30" FontFamily="Times New Roman" FontSize="16"/>
+                <TextBox x:Name="notes" VerticalAlignment="Center" Width="200" MaxLength="25" FontFamily="Times New Roman" FontSize="16"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10">
-                <Button x:Name="schedlue" Content="Schedule" Margin="10" Width="75" IsDefault="True" Click="ScheduleClick" IsEnabled="False"/>
+                <Button x:Name="schedlue" Content="Schedule" Margin="10" Width="75" IsDefault="True" Click="ScheduleClick"/>
                 <Button x:Name="cancel"  Content="Cancel" Margin="10" Width="75" IsCancel="True" Click="CancelClick"/>
             </StackPanel>
         </StackPanel>

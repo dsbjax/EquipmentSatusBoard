@@ -11,7 +11,7 @@
         <Image Name="backgroundImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100" Opacity="05"/>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15">
             <DockPanel  DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <Button Content="Next Page" x:Name="adminTechNextPage" Visibility="Visible" DockPanel.Dock="Right" Style="{x:Null}" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontFamily="Times New Roman" FontSize="16" Click="NextPageClick"/>
+                <Button Content="Next Page" x:Name="adminTechNextPage" Visibility="Visible" DockPanel.Dock="Right" Style="{x:Null}" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" FontFamily="Times New Roman" FontSize="16" Click="NextPageClick" Focusable="False"/>
                 <DockPanel x:Name="adminPageControls" DockPanel.Dock="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center" LastChildFill="False">
                     <Label x:Name="adminCurrentPage" FontFamily="TimesNewRoman" FontSize="16"  Content="0" DockPanel.Dock="Right" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     <Label Content=" CurrentPage:" FontFamily="TimesNewRoman" FontSize="16"  DockPanel.Dock="Right" Foreground="White" VerticalAlignment="Center" Margin="0" HorizontalAlignment="Right"/>

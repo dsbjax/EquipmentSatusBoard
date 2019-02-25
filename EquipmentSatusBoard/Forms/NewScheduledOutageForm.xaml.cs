@@ -45,20 +45,6 @@ namespace EquipmentSatusBoard.Forms
             endDate.SelectedDate = startDate.SelectedDate;
         }
 
-        private void WindowKeyUp(object sender, KeyEventArgs e)
-        {
-            schedlue.IsEnabled = endDate.SelectedDate.Value.CompareTo(startDate.SelectedDate.Value) == 0 &&
-                endTime.Text.CompareTo("0000") >= 0 && startTime.Text.CompareTo("0000") >= 0 &&
-                endTime.Text.CompareTo("2359") <= 0 && startTime.Text.CompareTo("2359") <= 0 &&
-                endTime.Text.CompareTo(startTime.Text) > 0
-
-                ||
-
-                endDate.SelectedDate.Value.CompareTo(startDate.SelectedDate.Value) > 0 &&
-                endTime.Text.CompareTo("0000") >= 0 && startTime.Text.CompareTo("0000") >= 0 &&
-                endTime.Text.CompareTo("2359") <= 0 && startTime.Text.CompareTo("2359") <= 0;
-        }
-
         private void TimeTextBoxGotFocus(object sender, RoutedEventArgs e)
         {
             ((TimeTextBox)sender).Text = "";
@@ -71,9 +57,9 @@ namespace EquipmentSatusBoard.Forms
                 return new ScheduledOutage()
                 {
                     OutageStart = new DateTime(startDate.SelectedDate.Value.Year, startDate.SelectedDate.Value.Month, startDate.SelectedDate.Value.Day,
-                    int.Parse(startTime.Text) / 100, int.Parse(startTime.Text) % 100, 0, DateTimeKind.Utc),
+                    int.Parse(startTime.Time) / 100, int.Parse(startTime.Time) % 100, 0, DateTimeKind.Utc),
                     OutageEnd = new DateTime(endDate.SelectedDate.Value.Year, endDate.SelectedDate.Value.Month, endDate.SelectedDate.Value.Day,
-                    int.Parse(endTime.Text) / 100, int.Parse(endTime.Text) % 100, 0, DateTimeKind.Utc),
+                    int.Parse(endTime.Time) / 100, int.Parse(endTime.Time) % 100, 0, DateTimeKind.Utc),
                     Notes = notes.Text
                 };
             }
@@ -81,9 +67,9 @@ namespace EquipmentSatusBoard.Forms
             set
             {
                 startDate.SelectedDate = value.OutageStart;
-                startTime.Text = value.OutageStart.ToString("HHmm");
+                startTime.Time = value.OutageStart.ToString("HHmm");
                 endDate.SelectedDate = value.OutageEnd;
-                endTime.Text = value.OutageEnd.ToString("HHmm");
+                endTime.Time = value.OutageEnd.ToString("HHmm");
                 notes.Text = value.Notes;
             }
         }
