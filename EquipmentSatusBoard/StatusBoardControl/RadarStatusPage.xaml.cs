@@ -1,4 +1,5 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
+using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.EquipmentControls;
 using System;
 using System.IO;
@@ -24,19 +25,25 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         private void LoadRadars()
         {
-            if(File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + Properties.Settings.Default.AppDataFolder + Properties.Settings.Default.SavedRadarsFilename))
-                using (var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + Properties.Settings.Default.AppDataFolder + Properties.Settings.Default.SavedRadarsFilename))
-                {
-                    string line;
-                    while(!reader.EndOfStream && (line = reader.ReadLine()).StartsWith("Start Equipment:"))
+            try
+            {
+                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + Properties.Settings.Default.AppDataFolder + Properties.Settings.Default.SavedRadarsFilename))
+                    using (var reader = new StreamReader(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + Properties.Settings.Default.AppDataFolder + Properties.Settings.Default.SavedRadarsFilename))
                     {
-                        var radar = new Equipment(line.Remove(0, 17), reader);
-                        radar.EquipmentDelete += RadarDelete;
-                        radar.Width = Double.NaN;
+                        string line;
+                        while (!reader.EndOfStream && (line = reader.ReadLine()).StartsWith("Start Equipment:"))
+                        {
+                            var radar = new Equipment(line.Remove(0, 17), reader);
+                            radar.EquipmentDelete += RadarDelete;
+                            radar.Width = Double.NaN;
 
-                        radars.Children.Add(radar);
+                            radars.Children.Add(radar);
+                        }
                     }
-                }
+            }catch(Exception ex)
+            {
+                ErrorLogger.LogError("Error Loading Radars, RadarStatusPage:LoadRadars()", ex);
+            }
         }
 
         public void SetMode(AppMode newMode)

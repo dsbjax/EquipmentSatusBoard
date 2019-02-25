@@ -71,7 +71,6 @@ namespace EquipmentSatusBoard
             }catch(Exception e)
             {
                 ErrorLogger.LogError("Error Loading Passwords, MainWindow.LoadPasswords()", e);
-                throw e;
             }
 
             return passwordsFromFile;

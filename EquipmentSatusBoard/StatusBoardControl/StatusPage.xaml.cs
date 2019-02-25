@@ -1,4 +1,5 @@
-﻿using EquipmentSatusBoard.EquipmentControls;
+﻿using EquipmentSatusBoard.CommonControls;
+using EquipmentSatusBoard.EquipmentControls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,29 +35,35 @@ namespace EquipmentSatusBoard.StatusBoardControl
         {
             InitializeComponent();
 
-            string line = statusLines.ReadLine();
-            while (!statusLines.EndOfStream && !line.StartsWith("Page End"))
+            try
             {
-                if (line.StartsWith("Background Image: "))
+                string line = statusLines.ReadLine();
+                while (!statusLines.EndOfStream && !line.StartsWith("Page End"))
                 {
-                    backgroundImageFilename = line.Replace("Background Image: ", null);
+                    if (line.StartsWith("Background Image: "))
+                    {
+                        backgroundImageFilename = line.Replace("Background Image: ", null);
 
-                    if (File.Exists(backgroundImageFilename))
-                        backgroundImage.Source = new BitmapImage(new Uri(backgroundImageFilename));
+                        if (File.Exists(backgroundImageFilename))
+                            backgroundImage.Source = new BitmapImage(new Uri(backgroundImageFilename));
 
-                    line = statusLines.ReadLine();
+                        line = statusLines.ReadLine();
+                    }
+
+                    while (line.StartsWith("Start Group:"))
+                    {
+                        var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
+                        group.EquipmentGroupDelete += GroupDelete;
+                        DockPanel.SetDock(group, Dock.Top);
+
+                        page.Children.Add(group);
+
+                        line = statusLines.ReadLine();
+                    }
                 }
-
-                while (line.StartsWith("Start Group:"))
-                {
-                    var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
-                    group.EquipmentGroupDelete += GroupDelete;
-                    DockPanel.SetDock(group, Dock.Top);
-
-                    page.Children.Add(group);
-
-                    line = statusLines.ReadLine();
-                }
+            }catch(Exception ex)
+            {
+                ErrorLogger.LogError("Error Loading Equipment Status Board, StatusPage:StatusPage()", ex);
             }
         }
 

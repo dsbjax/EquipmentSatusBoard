@@ -1,4 +1,5 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
+using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.Forms;
 using EquipmentSatusBoard.ScheduledOutageControls;
 using EquipmentSatusBoard.StatusBoardControl;
@@ -32,7 +33,14 @@ namespace EquipmentSatusBoard.EquipmentControls
         {
             InitializerCommonTasks();
 
+            equipmentStatusBackground.ToolTipOpening += EquipmentStatusBackground_ToolTipOpening;
+
             initComplete = true;
+        }
+
+        private void EquipmentStatusBackground_ToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+            if (equipmentStatusBackground.ToolTip.ToString().Length == 0) e.Handled = true;
         }
 
         //Used when importing equipment from a status file
@@ -40,17 +48,24 @@ namespace EquipmentSatusBoard.EquipmentControls
         {
             InitializerCommonTasks();
 
-            //Set equipment name on the controls used in different modes
-            slideEquipmentLabel.Content = techEquipmentLabel.Content = adminEquipmentTextBox.Text = equipmentName;
+            try
+            {
+                //Set equipment name on the controls used in different modes
+                slideEquipmentLabel.Content = techEquipmentLabel.Content = adminEquipmentTextBox.Text = equipmentName;
 
-            //Read in the equipment optios line and set options
-            var equipmentOptions = statusLines.ReadLine().Split(',');
-            SetImportedEquipmentStatus(equipmentOptions);
-            SetImportedOperationalStatus(equipmentOptions);
-            SetImportedEquipmentNotes(statusLines);
-            SetImportedEquipmentScheduledOutages(statusLines);
+                //Read in the equipment optios line and set options
+                var equipmentOptions = statusLines.ReadLine().Split(',');
+                SetImportedEquipmentStatus(equipmentOptions);
+                SetImportedOperationalStatus(equipmentOptions);
+                SetImportedEquipmentNotes(statusLines);
+                SetImportedEquipmentScheduledOutages(statusLines);
 
-            initComplete = true;
+                initComplete = true;
+
+            }catch(Exception ex)
+            {
+                ErrorLogger.LogError("Error Initializing Equipment from Status File, Equipment:Equipment()", ex);
+            }
         }
 
         // Equipment Initializers Start
@@ -100,9 +115,9 @@ namespace EquipmentSatusBoard.EquipmentControls
 
         private void SetImportedEquipmentNotes(StreamReader statusLines)
         {
-            noteText.Text = statusLines.ReadLine().Replace(Properties.Settings.Default.EquipStatsNoteHeader, null);
-            if (noteText.Text != "")
-                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+            equipmentStatusBackground.ToolTip = statusLines.ReadLine().Replace(Properties.Settings.Default.EquipStatsNoteHeader, null);
+            if (equipmentStatusBackground.ToolTip.ToString() != "")
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + equipmentStatusBackground.ToolTip.ToString());
         }
 
         private void SetImportedOperationalStatus(string[] equipmentOptions)
@@ -155,11 +170,11 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             if (form.Note != null)
             {
-                if (noteText.Text != null)
-                    EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + TAG_DELIMITER + noteText.Text);
+                if (equipmentStatusBackground.ToolTip.ToString() != null)
+                    EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + TAG_DELIMITER + equipmentStatusBackground.ToolTip.ToString());
 
                 EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + TAG_DELIMITER + form.Note);
-                noteText.Text = form.Note;
+                equipmentStatusBackground.ToolTip = form.Note;
             }
         }
 
@@ -199,41 +214,48 @@ namespace EquipmentSatusBoard.EquipmentControls
 
         private void EquipmentStatusClick(object sender, RoutedEventArgs e)
         {
-            MenuItem item = (MenuItem)sender;
-            if (item != null)
-                switch (status = (EquipmentStatus)item.Tag)
-                {
-                    case EquipmentStatus.Operational:
-                        equipmentStatusBackground.Fill = Brushes.Green;
-                        if (initComplete && noteText.Text != "")
-                            EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + ": " + noteText.Text);
+            try
+            {
+                MenuItem item = (MenuItem)sender;
+                if (item != null)
+                    switch (status = (EquipmentStatus)item.Tag)
+                    {
+                        case EquipmentStatus.Operational:
+                            equipmentStatusBackground.Fill = Brushes.Green;
+                            if (initComplete && equipmentStatusBackground.ToolTip.ToString() != "")
+                                EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(EquipmentName + ": " + equipmentStatusBackground.ToolTip.ToString());
 
-                        noteText.Text = "";
-                        break;
+                            equipmentStatusBackground.ToolTip = "";
+                            break;
 
-                    case EquipmentStatus.Degraded:
-                        equipmentStatusBackground.Fill = Brushes.Orange;
-                        if (initComplete) AddEditEquipmentStatusNote();
-                        break;
+                        case EquipmentStatus.Degraded:
+                            equipmentStatusBackground.Fill = Brushes.Orange;
+                            if (initComplete) AddEditEquipmentStatusNote();
+                            break;
 
-                    case EquipmentStatus.Down:
-                        equipmentStatusBackground.Fill = Brushes.Red;
-                        OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
-                        if (initComplete) AddEditEquipmentStatusNote();
-                        break;
+                        case EquipmentStatus.Down:
+                            equipmentStatusBackground.Fill = Brushes.Red;
+                            OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
+                            if (initComplete) AddEditEquipmentStatusNote();
+                            break;
 
-                    case EquipmentStatus.Scheduled:
-                        equipmentStatusBackground.Fill = Brushes.Gray;
-                        OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
-                        break;
-                }
+                        case EquipmentStatus.Scheduled:
+                            equipmentStatusBackground.Fill = Brushes.Gray;
+                            OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
+                            break;
+                    }
 
-            operationalMenuItem.IsChecked = degradedMenuItem.IsChecked = downMenuItem.IsChecked = 
-                scheduleMenuItem.IsChecked = unscheduledMenuItem.IsChecked = false;
+                operationalMenuItem.IsChecked = degradedMenuItem.IsChecked = downMenuItem.IsChecked =
+                    scheduleMenuItem.IsChecked = unscheduledMenuItem.IsChecked = false;
 
-            item.IsChecked = true;
+                item.IsChecked = true;
 
-            downMenuItem.IsChecked = scheduleMenuItem.IsChecked || unscheduledMenuItem.IsChecked;
+                downMenuItem.IsChecked = scheduleMenuItem.IsChecked || unscheduledMenuItem.IsChecked;
+
+            }catch(Exception ex)
+            {
+                ErrorLogger.LogError("Error Setting Operational Status, Equipment:Equipment StatusCLick()", ex);
+            }
         }
 
         private void OperationalStatusClick(object sender, RoutedEventArgs e)
@@ -274,7 +296,7 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             output += "Start Equipment: " + adminEquipmentTextBox.Text + "\n";
             output += "Eqiup Status = " + status.ToString() + ", Oper Status = " + slideTechHeader.Content.ToString() + "\n";
-            output += "Equip Status Note = " + noteText.Text + "\n";
+            output += "Equip Status Note = " + equipmentStatusBackground.ToolTip.ToString() + "\n";
 
             foreach (var outage in scheduledOutages)
                 output += "Schedule Outage: Start Date = " + outage.Start.ToString("MMddyyyy") +

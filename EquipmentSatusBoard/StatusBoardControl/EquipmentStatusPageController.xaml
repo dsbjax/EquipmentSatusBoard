@@ -5,9 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:EquipmentSatusBoard.StatusBoardControl"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="EquipmentSatusBoard.StatusBoardControl.EquipmentStatusPageController"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             mc:Ignorable="d" >
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Rectangle Style="{StaticResource EquipmentControlBackground}"/>
         <Image Name="backgroundImage" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="100" Opacity="05"/>
         <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="15">

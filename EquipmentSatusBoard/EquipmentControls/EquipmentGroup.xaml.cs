@@ -1,4 +1,5 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
+using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.Forms;
 using System;
 using System.Collections.Generic;
@@ -64,45 +65,52 @@ namespace EquipmentSatusBoard.EquipmentControls
         {
             InitializeComponent();
 
-            slideTechHeader.Content = adminHeader.Text = groupName;
-            var groupOptions = statusLines.ReadLine().Split(',');
-            wrap = groupOptions[0].Contains("True");
-            horizontal = groupOptions[1].Contains("True");
-            PageGroup = groupOptions[2].Contains("True");
-
-            if (horizontal)
-                wrapGroupPanel.Orientation = Orientation.Horizontal;
-            else
-                wrapGroupPanel.Orientation = Orientation.Vertical;
-
-
-            string line;
-            while(!(line = statusLines.ReadLine()).Equals("End Group"))
+            try
             {
-                if (line.StartsWith("Start Group:"))
-                {
-                    var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
-                    group.EquipmentGroupDelete += GroupDelete;
+                slideTechHeader.Content = adminHeader.Text = groupName;
+                var groupOptions = statusLines.ReadLine().Split(',');
+                wrap = groupOptions[0].Contains("True");
+                horizontal = groupOptions[1].Contains("True");
+                PageGroup = groupOptions[2].Contains("True");
 
-                    if (wrap)
-                        wrapGroupPanel.Children.Add(group);
-                    else
-                        noWrapGroupPanel.Children.Add(group);
-                }
+                if (horizontal)
+                    wrapGroupPanel.Orientation = Orientation.Horizontal;
                 else
+                    wrapGroupPanel.Orientation = Orientation.Vertical;
+
+
+                string line;
+                while (!(line = statusLines.ReadLine()).Equals("End Group"))
                 {
-                    var equipment = new Equipment(line.Remove(0, 17), statusLines);
-                    equipment.EquipmentDelete += EquipmentDelete;
+                    if (line.StartsWith("Start Group:"))
+                    {
+                        var group = new EquipmentGroup(line.Remove(0, 13), statusLines);
+                        group.EquipmentGroupDelete += GroupDelete;
 
-                    if (wrap)
-                        wrapGroupPanel.Children.Add(equipment);
+                        if (wrap)
+                            wrapGroupPanel.Children.Add(group);
+                        else
+                            noWrapGroupPanel.Children.Add(group);
+                    }
                     else
-                        noWrapGroupPanel.Children.Add(equipment);
-                }
-            }
+                    {
+                        var equipment = new Equipment(line.Remove(0, 17), statusLines);
+                        equipment.EquipmentDelete += EquipmentDelete;
 
-            AppModeNotifications.Subscribe(this);
-            SetMode(AppMode.Slide);
+                        if (wrap)
+                            wrapGroupPanel.Children.Add(equipment);
+                        else
+                            noWrapGroupPanel.Children.Add(equipment);
+                    }
+                }
+
+                AppModeNotifications.Subscribe(this);
+                SetMode(AppMode.Slide);
+
+            }catch(Exception ex)
+            {
+                ErrorLogger.LogError("Error Creating Equipment Group from Status File, EquipmentGroup:EquipmentGroup()", ex);
+            }
         }
 
         private void AdminDeleteButtonClick(object sender, RoutedEventArgs e)

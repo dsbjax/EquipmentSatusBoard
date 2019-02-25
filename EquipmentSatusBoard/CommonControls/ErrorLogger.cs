@@ -1,9 +1,11 @@
-﻿using System;
+﻿using EquipmentSatusBoard.Forms;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EquipmentSatusBoard.CommonControls
 {
@@ -22,6 +24,12 @@ namespace EquipmentSatusBoard.CommonControls
                 writer.WriteLine(e.StackTrace);
                 writer.WriteLine();
             }
+
+            var form = new AppErrorForm(errorMessage);
+            form.ShowDialog();
+
+            Application.Current.Shutdown();
+
         }
     }
 }
