@@ -290,6 +290,28 @@ namespace EquipmentSatusBoard.EquipmentControls
             }
         }
 
+        internal void GroupEquipmentStatusChange(EquipmentStatus newStatus)
+        {
+            switch(newStatus)
+            {
+                case EquipmentStatus.Degraded:
+                    equipmentStatusBackground.Fill = Brushes.Orange;
+                    break;
+
+                case EquipmentStatus.Down:
+                    equipmentStatusBackground.Fill = Brushes.Red;
+                    break;
+
+                case EquipmentStatus.Operational:
+                    equipmentStatusBackground.Fill = Brushes.Green;
+                    break;
+
+                case EquipmentStatus.Scheduled:
+                    equipmentStatusBackground.Fill = Brushes.Gray;
+                    break;
+            }
+        }
+
         public override string ToString()
         {
             string output = "";

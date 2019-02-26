@@ -1,6 +1,7 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
 using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.Forms;
+using EquipmentSatusBoard.StatusBoardControl;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +21,7 @@ namespace EquipmentSatusBoard.EquipmentControls
         internal event EquipmentGroupDeleteEventHandler EquipmentGroupDelete;
 
         private bool wrap = true, horizontal = true;
+        private string groupEquipmentStatus = null;
 
         bool pageGroup = false;
         public bool PageGroup {
@@ -31,9 +33,9 @@ namespace EquipmentSatusBoard.EquipmentControls
                 if(pageGroup)
                 {
                     groupBox.BorderThickness = new Thickness(0);
-                    adminHeader.FontSize = slideTechHeader.FontSize = 36;
-                    adminHeader.FontWeight = slideTechHeader.FontWeight = FontWeights.Bold;
-                    adminHeader.Effect = slideTechHeader.Effect = new DropShadowEffect()
+                    adminHeader.FontSize = slideHeader.FontSize = techHeader.FontSize = 36;
+                    adminHeader.FontWeight = slideHeader.FontWeight = techHeader.FontWeight = FontWeights.Bold;
+                    adminHeader.Effect = slideHeader.Effect = techHeader.Effect = new DropShadowEffect()
                     {
                         BlurRadius = 5,
                         Color = Colors.Black,
@@ -53,12 +55,13 @@ namespace EquipmentSatusBoard.EquipmentControls
             var form = new NewGroupDialog();
             form.ShowDialog();
 
-            slideTechHeader.Content = adminHeader.Text = form.GroupName;
+            slideHeader.Content = techHeader.Content = adminHeader.Text = form.GroupName;
             for (int i = 0; i < form.EquipmentCount; i++)
                 AddEquipmentClick(this, new RoutedEventArgs());
 
             AppModeNotifications.Subscribe(this);
             SetMode(AppMode.Admin);
+            SetTags();
         }
 
         public EquipmentGroup(string groupName, StreamReader statusLines)
@@ -67,7 +70,7 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             try
             {
-                slideTechHeader.Content = adminHeader.Text = groupName;
+                slideHeader.Content = techHeader.Content = adminHeader.Text = groupName;
                 var groupOptions = statusLines.ReadLine().Split(',');
                 wrap = groupOptions[0].Contains("True");
                 horizontal = groupOptions[1].Contains("True");
@@ -106,11 +109,19 @@ namespace EquipmentSatusBoard.EquipmentControls
 
                 AppModeNotifications.Subscribe(this);
                 SetMode(AppMode.Slide);
+                SetTags();
 
             }catch(Exception ex)
             {
                 ErrorLogger.LogError("Error Creating Equipment Group from Status File, EquipmentGroup:EquipmentGroup()", ex);
             }
+        }
+
+        private void SetTags()
+        {
+            operationalMenuItem.Tag = EquipmentStatus.Operational;
+            degradedMenuItem.Tag = EquipmentStatus.Degraded;
+            unscheduledMenuItem.Tag = EquipmentStatus.Down;
         }
 
         private void AdminDeleteButtonClick(object sender, RoutedEventArgs e)
@@ -159,7 +170,7 @@ namespace EquipmentSatusBoard.EquipmentControls
 
         private void AdminHeaderTextChanged(object sender, TextChangedEventArgs e)
         {
-            slideTechHeader.Content = adminHeader.Text;
+            slideHeader.Content = techHeader.Content = adminHeader.Text;
         }
 
         private void AddEquipmentGroupClick(object sender, RoutedEventArgs e)
@@ -226,7 +237,8 @@ namespace EquipmentSatusBoard.EquipmentControls
             adminHeader.Visibility = adminDeleteButton.Visibility = adminMenu.Visibility =
                 newMode == AppMode.Admin ? Visibility.Visible : Visibility.Collapsed;
 
-            slideTechHeader.Visibility = newMode != AppMode.Admin ? Visibility.Visible : Visibility.Collapsed;
+            slideHeader.Visibility = newMode == AppMode.Slide ? Visibility.Visible : Visibility.Collapsed;
+            techHeader.Visibility = newMode == AppMode.Tech ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public override string ToString()
@@ -256,6 +268,43 @@ namespace EquipmentSatusBoard.EquipmentControls
         {
             isWrap.IsChecked = wrap;
             isHorizontal.IsChecked = horizontal;
+        }
+
+        private void GroupEquipmentStatusClick(object sender, RoutedEventArgs e)
+        {
+            Panel activePanel;
+            var newStatus = (EquipmentStatus)((MenuItem)sender).Tag;
+
+            if (wrapGroupPanel.Children.Count > 0)
+                activePanel = wrapGroupPanel;
+            else
+                activePanel = noWrapGroupPanel;
+
+            foreach (var element in activePanel.Children)
+                if ( element.GetType() == typeof(Equipment))
+                    ((Equipment)element).GroupEquipmentStatusChange(newStatus);
+
+            if (newStatus == EquipmentStatus.Operational)
+                EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(adminHeader.Text + ": " + groupEquipmentStatus);
+            else
+            {
+                var form = new EquipmentStatusNoteForm();
+                form.ShowDialog();
+
+                if (form.Note != null)
+                {
+                        if (groupEquipmentStatus != null)
+                            EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(adminHeader.Text + ": " + groupEquipmentStatus);
+
+                        EquipmentStatusScrollingMarquee.AddEquipmentStatusText(adminHeader.Text + ": " + form.Note);
+                        groupEquipmentStatus = form.Note;
+                }
+            }
+
+            operationalMenuItem.IsChecked = newStatus == EquipmentStatus.Operational;
+            degradedMenuItem.IsChecked = newStatus == EquipmentStatus.Degraded;
+            unscheduledMenuItem.IsChecked = newStatus == EquipmentStatus.Down;
+            
         }
 
         private UIElementCollection ActivePanel()

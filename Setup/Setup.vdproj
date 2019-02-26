@@ -27,30 +27,12 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_95697B788AE84E49AE2701606A420ED2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A3E23E144B84B99E8C374258AB7ACA77"
         "OwnerKey" = "8:_7835573C4AA14F7AA85EA69ADB5F546D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_AE1A7EE1E5CE4D459935F5DA2A983C40"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FF64B76293DA4D37AB5B7B26E5024368"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7835573C4AA14F7AA85EA69ADB5F546D"
         "MsmSig" = "8:_UNDEFINED"
@@ -58,13 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A3E23E144B84B99E8C374258AB7ACA77"
+        "OwnerKey" = "8:_76F74659900A66A07F29A1ECECAD8AE4"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_76F74659900A66A07F29A1ECECAD8AE4"
+        "OwnerKey" = "8:_A3E23E144B84B99E8C374258AB7ACA77"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -169,11 +151,6 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_76F74659900A66A07F29A1ECECAD8AE4"
-                    {
-                    "Name" = "8:System.Net.Http.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -193,26 +170,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_95697B788AE84E49AE2701606A420ED2"
-            {
-            "SourcePath" = "8:C:\\ProgramData\\KBR Wyle\\Equipment Status Board\\Images\\Bristol Background Image.png"
-            "TargetName" = "8:Bristol Background Image.png"
-            "Tag" = "8:"
-            "Folder" = "8:_6EB40373B0384D5594F30BA0338D675B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A3E23E144B84B99E8C374258AB7ACA77"
             {
             "AssemblyRegister" = "3:1"
@@ -220,11 +177,6 @@
             "AssemblyAsmDisplayName" = "8:Xceed.Wpf.Toolkit, Version=3.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_A3E23E144B84B99E8C374258AB7ACA77"
-                    {
-                    "Name" = "8:Xceed.Wpf.Toolkit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Xceed.Wpf.Toolkit.dll"
             "TargetName" = "8:"
@@ -242,46 +194,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AE1A7EE1E5CE4D459935F5DA2A983C40"
-            {
-            "SourcePath" = "8:C:\\ProgramData\\KBR Wyle\\Equipment Status Board\\Images\\Sealord Background Image.png"
-            "TargetName" = "8:Sealord Background Image.png"
-            "Tag" = "8:"
-            "Folder" = "8:_6EB40373B0384D5594F30BA0338D675B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF64B76293DA4D37AB5B7B26E5024368"
-            {
-            "SourcePath" = "8:C:\\ProgramData\\KBR Wyle\\Equipment Status Board\\Images\\Maintenance Background Image.jpg"
-            "TargetName" = "8:Maintenance Background Image.jpg"
-            "Tag" = "8:"
-            "Folder" = "8:_6EB40373B0384D5594F30BA0338D675B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -429,15 +341,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Equipment Status Board"
-        "ProductCode" = "8:{1D323AED-7863-44D6-A3DE-54D83B883333}"
-        "PackageCode" = "8:{43346722-D1B6-4B17-A7D1-2A6F85E8C30C}"
+        "ProductCode" = "8:{4032620B-2C89-4279-BC8A-421D721E5E8E}"
+        "PackageCode" = "8:{CB0FE6F6-6DB3-4AEA-BE12-EA18D6BC4EAA}"
         "UpgradeCode" = "8:{E9F63D3C-FE9C-4079-8DC8-07C9A5B470DD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:KBR Wyle"
         "ARPHELPTELEPHONE" = "8:(904) 542-2245"
         "ARPHELPLINK" = "8:"
@@ -560,20 +472,6 @@
             "Transitive" = "11:FALSE"
             "Target" = "8:_7835573C4AA14F7AA85EA69ADB5F546D"
             "Folder" = "8:_60F03BC43FED4B2E971395419117D872"
-            "WorkingFolder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
-            "Icon" = "8:"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E5554F4682F44E68B5AB3782C4E64432"
-            {
-            "Name" = "8:Equipment Status Board"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_7835573C4AA14F7AA85EA69ADB5F546D"
-            "Folder" = "8:_3FA31F824B1F474AA27EA1AD4B312A2D"
             "WorkingFolder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
             "Icon" = "8:"
             "Feature" = "8:"

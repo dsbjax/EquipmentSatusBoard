@@ -9,8 +9,18 @@
         <GroupBox Name="groupBox" BorderBrush="White">
             <GroupBox.Header>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Button Name="adminDeleteButton" IsTabStop="False" Content="X" Style="{x:Null}" Visibility="Collapsed" Click="AdminDeleteButtonClick" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                    <Label Name="slideTechHeader" Content="New Group" Foreground="White" FontSize="24"/>
+                    <Button Name="adminDeleteButton" IsTabStop="False" Content="X" Style="{x:Null}" Visibility="Collapsed" Click="AdminDeleteButtonClick" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Center" Focusable="False"/>
+                    <Label Name="slideHeader" Content="New Group" Foreground="White" FontSize="24"/>
+                    <Label Name="techHeader" Content="New Group" Foreground="White" FontSize="24">
+                        <Label.ContextMenu>
+                            <ContextMenu>
+                                <Label Content="Equipment Group Status"/>
+                                <MenuItem Name="operationalMenuItem" Header="Operational" IsChecked="True" Click="GroupEquipmentStatusClick"/>
+                                <MenuItem Name="degradedMenuItem" Header="Degraded" Click="GroupEquipmentStatusClick"/>
+                                <MenuItem Name="unscheduledMenuItem" Header="Down" Click="GroupEquipmentStatusClick"/>
+                            </ContextMenu>
+                        </Label.ContextMenu>
+                    </Label>
                     <TextBox Name="adminHeader" Text="New Group" Visibility="Collapsed" Foreground="White" FontSize="24" Background="{x:Null}" BorderBrush="{x:Null}" TextChanged="AdminHeaderTextChanged" />
                 </StackPanel>
             </GroupBox.Header>
