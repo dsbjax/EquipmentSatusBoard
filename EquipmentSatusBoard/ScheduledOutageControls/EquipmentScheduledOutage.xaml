@@ -10,7 +10,7 @@
         <ContextMenu>
             <MenuItem x:Name="modifyOutage" Header="Modify Scheduled Outage" Click="ModifyOutageClick"/>
             <MenuItem x:Name="deleteOutage" Header="Delete Scheduled Outage" Click="DeleteOutageClick"/>
-            <MenuItem x:Name="endOutage" Header="End Active Outage" Click="EndOutage_Click"/>
+            <MenuItem x:Name="endOutage" Header="End Active Outage" Click="EndOutageClick"/>
         </ContextMenu>
     </UserControl.ContextMenu>
     <Grid HorizontalAlignment="Stretch">

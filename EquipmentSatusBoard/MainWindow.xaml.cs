@@ -8,6 +8,8 @@ using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using EquipmentSatusBoard.CommonControls;
+using WPFLibrary;
+using System.Collections.Generic;
 
 namespace EquipmentSatusBoard
 {
@@ -32,7 +34,14 @@ namespace EquipmentSatusBoard
                 app.Run();
             }catch(Exception e)
             {
-                WPFLibrary.ErrorLogger.ErrorDialog("Unhandled Execption: " + e.Message, WPFLibrary.ErrorType.Failure);
+                var error = "Error Unhandeld Exception";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 
@@ -48,6 +57,8 @@ namespace EquipmentSatusBoard
         private AppModeNotifications modeChangeNotifications = new AppModeNotifications();
         private AppModePassword[] savedPasswords;
 
+        private AppTimer appTimer = new AppTimer();
+
         public MainWindow()
         {
             try
@@ -62,7 +73,13 @@ namespace EquipmentSatusBoard
 
             }catch(Exception e)
             {
-                ErrorLogger.LogError("Error Initializing Main Window, MainWindow()", e);
+                var error = "Error Initializine Main Window";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
                 Close();
             }
         }
@@ -76,7 +93,7 @@ namespace EquipmentSatusBoard
 
             try
             {
-                using (FileStream passwordsReader = new FileStream(SAVED_PASSWORDS_FILE, FileMode.Open, FileAccess.Read))
+                using (FileStream passwordsReader = new FileStream(SAVED_PASSWORDS_FILE + "l", FileMode.Open, FileAccess.Read))
                 {
                     byte[] adminPassword = new byte[32];
                     byte[] techPassword = new byte[32];
@@ -90,7 +107,14 @@ namespace EquipmentSatusBoard
                 }
             }catch(Exception e)
             {
-                ErrorLogger.LogError("Error Loading Passwords, MainWindow.LoadPasswords()", e);
+                var error = "Error Loading Passwords";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e, 
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
 
             return passwordsFromFile;
@@ -132,7 +156,14 @@ namespace EquipmentSatusBoard
             }
             catch (Exception e)
             {
-                ErrorLogger.LogError("Error Validating Password, MainWIndow.ValidatePassword(AppMode)", e);
+                var error = "Error Validating Password";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
                 return false;
             }
 
@@ -164,7 +195,14 @@ namespace EquipmentSatusBoard
                     }
             }catch(Exception e)
             {
-                ErrorLogger.LogError("Error Creating Passwords, MainWindow.CreatePasswords", e);
+                var error = "Error Creating Passwords";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
 
             return null;
@@ -183,7 +221,14 @@ namespace EquipmentSatusBoard
                 }
             }catch(Exception e)
             {
-                ErrorLogger.LogError("Error Saving Passswords, MainWindow.SavePasswords(AppModePassword[])", e);
+                var error = "Error Saving Password";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 

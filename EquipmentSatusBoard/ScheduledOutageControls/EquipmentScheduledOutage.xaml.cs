@@ -17,15 +17,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.ScheduledOutageControls
 {
     /// <summary>
     /// Interaction logic for EquipmentScheduledOutage.xaml
     /// </summary>
-    public partial class EquipmentScheduledOutage : UserControl, IComparable<EquipmentScheduledOutage>, IAppMode
+    public partial class EquipmentScheduledOutage : UserControl, IComparable<EquipmentScheduledOutage>, IAppMode, IAppTimer
     {
-        private DispatcherTimer timer = new DispatcherTimer();
+        //private DispatcherTimer timer = new DispatcherTimer();
         private string statusNote;
 
         private DateTime start;
@@ -76,8 +77,8 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
         {
             InitializeComponent();
 
+            AppTimer.Subscribe(this, TimerInterval.OnTheMinute);
             AppModeNotifications.Subscribe(this);
-            StartTimer();
             mode = AppMode.Tech;
         }
 
@@ -90,39 +91,9 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
             End = scheduledOutage.OutageEnd;
             Notes = scheduledOutage.Notes;
 
+            AppTimer.Subscribe(this, TimerInterval.OnTheMinute);
             AppModeNotifications.Subscribe(this);
-            StartTimer();
             mode = AppMode.Tech;
-        }
-
-        private void StartTimer()
-        {
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += TimerTick;
-            timer.Start();
-        }
-
-        private void TimerTick(object sender, EventArgs e)
-        {
-            if (background.Background != Brushes.LightBlue && DateTime.UtcNow.Date.CompareTo(start.Date) > 0)
-                background.Background = Brushes.LightBlue;
-
-            if (background.Background != Brushes.LightGreen && DateTime.UtcNow.Date.CompareTo(start.Date) == 0)
-                background.Background = Brushes.LightGreen;
-
-            if (background.Background != Brushes.Red && (DateTime.UtcNow.CompareTo(start) > -1 && DateTime.UtcNow.CompareTo(end) < 1))
-            {
-                background.Background = Brushes.Red;
-                equipment.StartScheduledOutage();
-
-                statusNote = equipment.EquipmentName + ": ";
-                statusNote += Notes + " ";
-                statusNote += (Start.Date.Equals(End.Date) ? Start.ToString("HHmm") : Start.ToString("MM/dd HHmm"))+ " to ";
-                statusNote += Start.Date.Equals(End.Date) ? End.ToString("HHmm") : End.ToString("MM/dd HHmm");
-
-                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(statusNote);
-                timer.Stop();
-            }
         }
 
         public int CompareTo(EquipmentScheduledOutage other)
@@ -168,13 +139,14 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
 
         private void DeleteOutageClick(object sender, RoutedEventArgs e)
         {
+            AppTimer.Unsubscribe(this);
             ScheduledOutages.RemoveOutage(this);
             Equipment.RemoveScheduledOutage(this);
         }
 
-        private void EndOutage_Click(object sender, RoutedEventArgs e)
+        private void EndOutageClick(object sender, RoutedEventArgs e)
         {
-            timer.Stop();
+            AppTimer.Unsubscribe(this);
             equipment.EndScheduledOutage(this);
             ScheduledOutages.RemoveOutage(this);
             EquipmentStatusScrollingMarquee.RemoveEquipmentStatusText(statusNote);
@@ -183,6 +155,30 @@ namespace EquipmentSatusBoard.ScheduledOutageControls
         private void TimeTextboxGotFocus(object sender, RoutedEventArgs e)
         {
             ((TimeTextBox)sender).Text = "";
+        }
+
+        public void Tick(TimerInterval interval)
+        {
+            if (background.Background != Brushes.LightBlue && DateTime.UtcNow.Date.CompareTo(start.Date) > 0)
+                background.Background = Brushes.LightBlue;
+
+            if (background.Background != Brushes.LightGreen && DateTime.UtcNow.Date.CompareTo(start.Date) == 0)
+                background.Background = Brushes.LightGreen;
+
+            if (background.Background != Brushes.Red && (DateTime.UtcNow.CompareTo(start) > -1 && DateTime.UtcNow.CompareTo(end) < 1))
+            {
+                background.Background = Brushes.Red;
+                equipment.StartScheduledOutage();
+
+                statusNote = equipment.EquipmentName + ": ";
+                statusNote += Notes + " ";
+                statusNote += (Start.Date.Equals(End.Date) ? Start.ToString("HHmm") : Start.ToString("MM/dd HHmm")) + " to ";
+                statusNote += Start.Date.Equals(End.Date) ? End.ToString("HHmm") : End.ToString("MM/dd HHmm");
+
+                EquipmentStatusScrollingMarquee.AddEquipmentStatusText(statusNote);
+                AppTimer.Unsubscribe(this);
+            }
+
         }
     }
 

@@ -91,7 +91,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="CommonControls\ErrorLogger.cs" />
     <Compile Include="CommonControls\LabelButton.xaml.cs">
       <DependentUpon>LabelButton.xaml</DependentUpon>
     </Compile>

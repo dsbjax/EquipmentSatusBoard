@@ -9,6 +9,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.EquipmentControls
 {
@@ -62,9 +63,16 @@ namespace EquipmentSatusBoard.EquipmentControls
 
                 initComplete = true;
 
-            }catch(Exception ex)
+            }catch(Exception e)
             {
-                ErrorLogger.LogError("Error Initializing Equipment from Status File, Equipment:Equipment()", ex);
+                var error = "Error Initializine Equipment Item";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 
@@ -254,7 +262,14 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             }catch(Exception ex)
             {
-                ErrorLogger.LogError("Error Setting Operational Status, Equipment:Equipment StatusCLick()", ex);
+                var error = "Error Initializine Main Window";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, ex,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 

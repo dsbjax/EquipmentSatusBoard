@@ -15,13 +15,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.StatusBarControl
 {
     /// <summary>
     /// Interaction logic for StatusBarControl.xaml
     /// </summary>
-    public partial class StatusBarControl : UserControl, IAppMode
+    public partial class StatusBarControl : UserControl, IAppMode, IAppTimer
     {
         private static string PHONE_NUMBERS_FOLDER = 
             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)
@@ -32,16 +33,13 @@ namespace EquipmentSatusBoard.StatusBarControl
         internal delegate void AppModeChangeRequestEventHandler(object sender, EventArgs e);
         internal event AppModeChangeRequestEventHandler AppModeChangeRequest;
 
-        DispatcherTimer timer = new DispatcherTimer();
-
         public StatusBarControl()
         {
             InitializeComponent();
 
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += TimerTick;
-            timer.Start();
+            SetDateTime();
 
+            AppTimer.Subscribe(this, TimerInterval.OnTheMinute);
             AppModeNotifications.Subscribe(this);
         }
 
@@ -62,13 +60,6 @@ namespace EquipmentSatusBoard.StatusBarControl
 
             if (newMode == AppMode.Slide)
                 SavePhoneNumbers();
-        }
-
-        private void TimerTick(object sender, EventArgs e)
-        {
-            date.Content = DateTime.Now.ToLongDateString();
-            local.Content = DateTime.Now.ToString("HHmm");
-            utc.Content = DateTime.UtcNow.ToString("HHmm");
         }
 
         private void ModeChangeRequestClick(object sender, RoutedEventArgs e)
@@ -112,6 +103,18 @@ namespace EquipmentSatusBoard.StatusBarControl
                 writer.WriteLine(adminCDO.Text);
                 writer.WriteLine(adminDutyTech.Text);
             }
+        }
+
+        public void Tick(TimerInterval interval)
+        {
+            SetDateTime();
+        }
+
+        private void SetDateTime()
+        {
+            date.Content = DateTime.Now.ToLongDateString();
+            local.Content = DateTime.Now.ToString("HHmm");
+            utc.Content = DateTime.UtcNow.ToString("HHmm");
         }
     }
 }

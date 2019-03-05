@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.EquipmentControls
 {
@@ -111,9 +112,16 @@ namespace EquipmentSatusBoard.EquipmentControls
                 SetMode(AppMode.Slide);
                 SetTags();
 
-            }catch(Exception ex)
+            }catch(Exception e)
             {
-                ErrorLogger.LogError("Error Creating Equipment Group from Status File, EquipmentGroup:EquipmentGroup()", ex);
+                var error = "Error Initializine Main Window";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 

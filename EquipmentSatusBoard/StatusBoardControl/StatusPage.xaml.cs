@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.StatusBoardControl
 {
@@ -63,7 +64,14 @@ namespace EquipmentSatusBoard.StatusBoardControl
                 }
             }catch(Exception ex)
             {
-                ErrorLogger.LogError("Error Loading Equipment Status Board, StatusPage:StatusPage()", ex);
+                var error = "Error Initializine Main Window";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, ex,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 

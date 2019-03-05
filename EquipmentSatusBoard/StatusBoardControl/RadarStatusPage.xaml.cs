@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.StatusBoardControl
 {
@@ -42,7 +43,14 @@ namespace EquipmentSatusBoard.StatusBoardControl
                     }
             }catch(Exception ex)
             {
-                ErrorLogger.LogError("Error Loading Radars, RadarStatusPage:LoadRadars()", ex);
+                var error = "Error Loading Radars";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, ex,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
             }
         }
 

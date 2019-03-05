@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using WPFLibrary;
 
 namespace EquipmentSatusBoard.StatusBoardControl
 {
@@ -169,7 +170,14 @@ namespace EquipmentSatusBoard.StatusBoardControl
                             }
                         }catch(Exception e)
                         {
-                            ErrorLogger.LogError("Error Creating Status Page", e);
+                            var error = "Error Loading Status pages";
+
+                            ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                            ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
                         }
                     }
                 }
