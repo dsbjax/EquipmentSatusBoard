@@ -64,6 +64,9 @@
   <PropertyGroup>
     <ApplicationIcon>esb.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>EquipmentSatusBoard.MainWindow</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -84,10 +87,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </ApplicationDefinition>
+    </Page>
     <Compile Include="CommonControls\ErrorLogger.cs" />
     <Compile Include="CommonControls\LabelButton.xaml.cs">
       <DependentUpon>LabelButton.xaml</DependentUpon>
@@ -290,6 +293,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\dsbSoftware\MyLibrary\ClassLibrary\ClassLibrary.csproj">
+      <Project>{d952bdbb-7034-4c27-93ba-9cee7adeed3b}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\dsbSoftware\MyLibrary\WPFLibrary\WPFLibrary.csproj">
+      <Project>{11ec5682-364e-4746-a7d4-d5e27a4c08e6}</Project>
+      <Name>WPFLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

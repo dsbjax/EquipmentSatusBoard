@@ -16,6 +16,26 @@ namespace EquipmentSatusBoard
     /// </summary>
     public partial class MainWindow : Window, IAppMode
     {
+        /// <summary>
+        /// Application Entry Point.
+        /// </summary>
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        public static void Main()
+        {
+            EquipmentSatusBoard.App app = new EquipmentSatusBoard.App();
+
+            try
+            {
+                app.InitializeComponent();
+                app.Run();
+            }catch(Exception e)
+            {
+                WPFLibrary.ErrorLogger.ErrorDialog("Unhandled Execption: " + e.Message, WPFLibrary.ErrorType.Failure);
+            }
+        }
+
         private static string SAVED_PASSWORDS_FOLDER =
             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
             Properties.Settings.Default.AppDataFolder;
