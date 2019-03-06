@@ -2044,7 +2044,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:dsbwpflib, Version=1.0.2019.64, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:dsbwpflib, Version=1.0.2019.65, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_0772D99DD56E3484A71FC148ACEFEE26"
@@ -3253,7 +3253,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:dsbclsslib, Version=1.0.2019.64, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:dsbclsslib, Version=1.0.2019.65, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_6C4824BF5A0C61B1EC49EC33EDCC3DCA"
@@ -5502,15 +5502,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Equipment Status Board"
-        "ProductCode" = "8:{84997CB5-B1E6-472D-9F40-EAEC68EC744C}"
-        "PackageCode" = "8:{408F646F-0ABA-4603-9C3E-227C04FFB39E}"
+        "ProductCode" = "8:{C81B80A3-CB3A-4AD3-9AF4-FC6D97A2A315}"
+        "PackageCode" = "8:{37C099F6-D88F-49E2-AE88-98134A978CCA}"
         "UpgradeCode" = "8:{E9F63D3C-FE9C-4079-8DC8-07C9A5B470DD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.7"
+        "ProductVersion" = "8:1.1.8"
         "Manufacturer" = "8:KBR Wyle"
         "ARPHELPTELEPHONE" = "8:(904) 542-2245"
         "ARPHELPLINK" = "8:"
@@ -6038,7 +6038,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7835573C4AA14F7AA85EA69ADB5F546D"
             {
-            "SourcePath" = "8:..\\EquipmentSatusBoard\\obj\\Debug\\Equipment Satus Board.exe"
+            "SourcePath" = "8:..\\EquipmentSatusBoard\\obj\\Release\\Equipment Satus Board.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_AB04E43E139C45B6A5A5E24051988D26"
