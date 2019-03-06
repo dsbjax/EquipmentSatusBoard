@@ -1,5 +1,4 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
-using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.Forms;
 using EquipmentSatusBoard.ScheduledOutageControls;
 using EquipmentSatusBoard.StatusBoardControl;
@@ -38,13 +37,10 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             initComplete = true;
         }
-
         private void EquipmentStatusBackground_ToolTipOpening(object sender, ToolTipEventArgs e)
         {
             if (equipmentStatusBackground.ToolTip.ToString().Length == 0) e.Handled = true;
         }
-
-        //Used when importing equipment from a status file
         public Equipment(string equipmentName, StreamReader statusLines)
         {
             InitializerCommonTasks();
@@ -63,9 +59,63 @@ namespace EquipmentSatusBoard.EquipmentControls
 
                 initComplete = true;
 
-            }catch(Exception e)
+            }catch(OutOfMemoryException e)
             {
-                var error = "Error Initializine Equipment Item";
+                var error = "Error Importing Equipment Item:\nOut of Memomry Exception in Streamreader\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }
+            catch (IOException e)
+            {
+                var error = "Error Importing Equipment Item:\nIO Exception in Streamreader\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }
+            catch (ArgumentNullException e)
+            {
+                var error = "Error Importing Equipment Item:\nAn Aurgument Null Exception occured wihle importin an Equipment Item\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }catch(FormatException e)
+            {
+                var error = "Error Importing Equipment Item:\nA Format Exception occured while parsing Date/Time\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }
+            catch (OverflowException e)
+            {
+                var error = "Error Importing Equipment Item:\nA Overflow Exception occured while parsing Date/Time\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }
+            catch (Exception e)
+            {
+                var error = "Error Importing Equipment Item:\nAn Unknown Exception occured while importing Equipment Item\nSee dump file\nSee dump file";
 
                 ErrorLogger.ErrorDialog(error, ErrorType.Failure);
                 ErrorLogger.LogError(error, e,
@@ -75,8 +125,6 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             }
         }
-
-        // Equipment Initializers Start
         private void InitializerCommonTasks()
         {
             InitializeComponent();
@@ -88,7 +136,6 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             SetMenuItemTags();
         }
-
         private void SetImportedEquipmentScheduledOutages(StreamReader statusLines)
         {
             string line;
@@ -120,14 +167,12 @@ namespace EquipmentSatusBoard.EquipmentControls
                 ScheduledOutages.AddOutage(outage);
             }
         }
-
         private void SetImportedEquipmentNotes(StreamReader statusLines)
         {
             equipmentStatusBackground.ToolTip = statusLines.ReadLine().Replace(Properties.Settings.Default.EquipStatsNoteHeader, null);
             if (equipmentStatusBackground.ToolTip.ToString() != "")
                 EquipmentStatusScrollingMarquee.AddEquipmentStatusText(EquipmentName + ": " + equipmentStatusBackground.ToolTip.ToString());
         }
-
         private void SetImportedOperationalStatus(string[] equipmentOptions)
         {
             if (equipmentOptions[1].Contains("On"))
@@ -135,7 +180,6 @@ namespace EquipmentSatusBoard.EquipmentControls
             else
                 OperationalStatusClick(offLineMenuItem, new RoutedEventArgs());
         }
-
         private void SetImportedEquipmentStatus(string[] equipmentOptions)
         {
             switch (equipmentOptions[0].Substring(equipmentOptions[0].LastIndexOf(' ') + 1))
@@ -157,7 +201,6 @@ namespace EquipmentSatusBoard.EquipmentControls
                     break;
             }
         }
-
         private void SetMenuItemTags()
         {
             operationalMenuItem.Tag = EquipmentStatus.Operational;
@@ -262,7 +305,7 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             }catch(Exception ex)
             {
-                var error = "Error Initializine Main Window";
+                var error = "Error Setting Equipment Status:\nUknown Exception\nSee dump fille";
 
                 ErrorLogger.ErrorDialog(error, ErrorType.Failure);
                 ErrorLogger.LogError(error, ex,
@@ -289,11 +332,24 @@ namespace EquipmentSatusBoard.EquipmentControls
 
             if (form.ShowDialog() == true)
             {
-                var outage = new EquipmentScheduledOutage(this, form.ScheduledOutage);
-                ScheduledOutages.AddOutage(outage);
-                scheduledOutages.Add(outage);
-            }
+                try
+                {
+                    var outage = new EquipmentScheduledOutage(this, form.ScheduledOutage);
+                    ScheduledOutages.AddOutage(outage);
+                    scheduledOutages.Add(outage);
+                }
+                catch (Exception ex)
+                {
+                    var error = "Error Creating Scheduled Outage:\nUknown Exception\nSee dump fille";
 
+                    ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                    ErrorLogger.LogError(error, ex,
+                        Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                        Properties.Settings.Default.AppDataFolder +
+                        Properties.Settings.Default.ErrorLogFilename);
+
+                }
+            }
         }
 
         private void DeleteClick(object sender, RoutedEventArgs e)

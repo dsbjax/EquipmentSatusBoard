@@ -42,11 +42,13 @@ namespace EquipmentSatusBoard.StatusBoardControl
         {
             base.OnRenderSizeChanged(sizeInfo);
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.From = -2 * equipmentStatus.ActualWidth;
-            doubleAnimation.To = marqueeCanvas.ActualWidth;
-            doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-            doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:30"));
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                From = -2 * equipmentStatus.ActualWidth,
+                To = marqueeCanvas.ActualWidth,
+                RepeatBehavior = RepeatBehavior.Forever,
+                Duration = new Duration(TimeSpan.Parse("0:0:30"))
+            };
             equipmentStatus.BeginAnimation(Canvas.RightProperty, doubleAnimation);
         }
 
@@ -57,11 +59,13 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
             equipmentStatus.Text += text;
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.From = -2 * equipmentStatus.ActualWidth;
-            doubleAnimation.To = marqueeCanvas.ActualWidth;
-            doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-            doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:30"));
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                From = -2 * equipmentStatus.ActualWidth,
+                To = marqueeCanvas.ActualWidth,
+                RepeatBehavior = RepeatBehavior.Forever,
+                Duration = new Duration(TimeSpan.Parse("0:0:30"))
+            };
             equipmentStatus.BeginAnimation(Canvas.RightProperty, doubleAnimation);
         }
 
@@ -72,11 +76,13 @@ namespace EquipmentSatusBoard.StatusBoardControl
             if (equipmentStatus.Text.EndsWith(DELIMITOR))
                 equipmentStatus.Text = equipmentStatus.Text.Remove(equipmentStatus.Text.Length - DELIMITOR.Length);
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.From = -equipmentStatus.ActualWidth;
-            doubleAnimation.To = marqueeCanvas.ActualWidth;
-            doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
-            doubleAnimation.Duration = new Duration(TimeSpan.Parse("0:0:30"));
+            DoubleAnimation doubleAnimation = new DoubleAnimation
+            {
+                From = -equipmentStatus.ActualWidth,
+                To = marqueeCanvas.ActualWidth,
+                RepeatBehavior = RepeatBehavior.Forever,
+                Duration = new Duration(TimeSpan.Parse("0:0:30"))
+            };
             equipmentStatus.BeginAnimation(Canvas.RightProperty, doubleAnimation);
         }
 

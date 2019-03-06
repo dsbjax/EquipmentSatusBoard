@@ -1,14 +1,10 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
-using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.EquipmentControls;
 using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using WPFLibrary;
 
 namespace EquipmentSatusBoard.StatusBoardControl
@@ -16,7 +12,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
     /// <summary>
     /// Interaction logic for EquipmentStatusPageController.xaml
     /// </summary>
-    public partial class EquipmentStatusPageController : UserControl, IAppMode
+    public partial class EquipmentStatusPageController : UserControl, IAppMode, IAppTimer
     {
         private static string CURRENT_STATUS_BOARD_FOLDER = 
             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
@@ -30,20 +26,17 @@ namespace EquipmentSatusBoard.StatusBoardControl
             Properties.Settings.Default.SavedPagesFolder;
 
         int pageCount = 0, currentPage = 0;
-        DispatcherTimer timer = new DispatcherTimer();
 
         public EquipmentStatusPageController()
         {
             InitializeComponent();
             AppModeNotifications.Subscribe(this);
-            timer.Tick += TimerTick;
 
             LoadStatusPages();
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            NextPageClick(this, new RoutedEventArgs());
         }
 
         private void SetVisibility()
@@ -82,7 +75,8 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         private void SlideIntervalValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            timer.Interval = new TimeSpan(0,0, (int)slideInterval.Value);
+            AppTimer.Unsubscribe(this);
+            AppTimer.Subscribe(this, TimerInterval.Seconds, (int)slideInterval.Value);
         }
 
         public void SetMode(AppMode newMode)
@@ -92,11 +86,10 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
             if (newMode == AppMode.Slide && pageCount > 1)
             {
-                timer.Interval = new TimeSpan(0, 0, 10);
-                timer.Start();
+                SlideIntervalValueChanged(this, null);
             }
             else
-                timer.Stop();
+                AppTimer.Unsubscribe(this);
 
             if (newMode == AppMode.Slide)
                 Save();
@@ -134,13 +127,15 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         private void LoadPageClick(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-            openFile.Title = "Load Status Page";
-            openFile.Filter = "Equipment Status Page|*.page|Equipment Status Board|*.status|All Files|*.*";
-            openFile.InitialDirectory = SAVED_STATUS_PAGES_FOLDER;
-            openFile.Multiselect = false;
+            OpenFileDialog openFile = new OpenFileDialog
+            {
+                Title = "Load Status Page",
+                Filter = "Equipment Status Page|*.page|Equipment Status Board|*.status|All Files|*.*",
+                InitialDirectory = SAVED_STATUS_PAGES_FOLDER,
+                Multiselect = false
+            };
 
-            if(openFile.ShowDialog() == true)
+            if (openFile.ShowDialog() == true)
                 LoadStatusPages(openFile.FileName);
         }
 
@@ -188,14 +183,16 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         private void SavePageClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.AddExtension = true;
-            saveFile.DefaultExt = ".page";
-            saveFile.Title = "Save Status Page";
-            saveFile.InitialDirectory = SAVED_STATUS_PAGES_FOLDER;
-            
-            saveFile.OverwritePrompt = true;
-            saveFile.Filter = "Equipment Status Page|*.page";
+            SaveFileDialog saveFile = new SaveFileDialog
+            {
+                AddExtension = true,
+                DefaultExt = ".page",
+                Title = "Save Status Page",
+                InitialDirectory = SAVED_STATUS_PAGES_FOLDER,
+
+                OverwritePrompt = true,
+                Filter = "Equipment Status Page|*.page"
+            };
 
             if (saveFile.ShowDialog() == true)
                 SaveStatusPage(pages.Children[currentPage - 1], saveFile.FileName);
@@ -217,13 +214,15 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         private void SaveAllPagesClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.AddExtension = true;
-            saveFile.DefaultExt = ".status";
-            saveFile.Title = "Save Equipment Status Board";
-            saveFile.InitialDirectory = SAVED_STATUS_PAGES_FOLDER;
-            saveFile.OverwritePrompt = true;
-            saveFile.Filter = "Equipment Status Board|*.status";
+            SaveFileDialog saveFile = new SaveFileDialog
+            {
+                AddExtension = true,
+                DefaultExt = ".status",
+                Title = "Save Equipment Status Board",
+                InitialDirectory = SAVED_STATUS_PAGES_FOLDER,
+                OverwritePrompt = true,
+                Filter = "Equipment Status Board|*.status"
+            };
 
             saveFile.ShowDialog();
 
@@ -249,9 +248,10 @@ namespace EquipmentSatusBoard.StatusBoardControl
 
         private void SetBackgroundImageClick(object sender, RoutedEventArgs e)
         {
-            var getImage = new OpenFileDialog();
-
-            getImage.Title = "Get Background Image";
+            var getImage = new OpenFileDialog
+            {
+                Title = "Get Background Image"
+            };
             getImage.ShowDialog();
 
             ((StatusPage)pages.Children[currentPage - 1]).SetBackgroundImage(getImage.FileName);
@@ -265,6 +265,11 @@ namespace EquipmentSatusBoard.StatusBoardControl
         public void LoadStatusPages()
         {
             LoadStatusPages(CURRENT_STATUS_BOARD_FILE);
+        }
+
+        public void Tick(TimerInterval interval)
+        {
+            NextPageClick(this, new RoutedEventArgs());
         }
     }
 }

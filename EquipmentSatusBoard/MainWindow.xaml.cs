@@ -18,32 +18,6 @@ namespace EquipmentSatusBoard
     /// </summary>
     public partial class MainWindow : Window, IAppMode
     {
-        /// <summary>
-        /// Application Entry Point.
-        /// </summary>
-        [System.STAThreadAttribute()]
-        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
-        public static void Main()
-        {
-            EquipmentSatusBoard.App app = new EquipmentSatusBoard.App();
-
-            try
-            {
-                app.InitializeComponent();
-                app.Run();
-            }catch(Exception e)
-            {
-                var error = "Error Unhandeld Exception";
-
-                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
-                ErrorLogger.LogError(error, e,
-                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
-                    Properties.Settings.Default.AppDataFolder +
-                    Properties.Settings.Default.ErrorLogFilename);
-
-            }
-        }
 
         private static string SAVED_PASSWORDS_FOLDER =
             Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
@@ -57,8 +31,6 @@ namespace EquipmentSatusBoard
         private AppModeNotifications modeChangeNotifications = new AppModeNotifications();
         private AppModePassword[] savedPasswords;
 
-        private AppTimer appTimer = new AppTimer();
-
         public MainWindow()
         {
             try
@@ -70,8 +42,8 @@ namespace EquipmentSatusBoard
 
                 Events();
                 modeChangeNotifications.Broadcast(AppMode.Slide);
-
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 var error = "Error Initializine Main Window";
 
@@ -93,7 +65,7 @@ namespace EquipmentSatusBoard
 
             try
             {
-                using (FileStream passwordsReader = new FileStream(SAVED_PASSWORDS_FILE + "l", FileMode.Open, FileAccess.Read))
+                using (FileStream passwordsReader = new FileStream(SAVED_PASSWORDS_FILE, FileMode.Open, FileAccess.Read))
                 {
                     byte[] adminPassword = new byte[32];
                     byte[] techPassword = new byte[32];

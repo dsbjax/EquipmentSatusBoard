@@ -65,7 +65,8 @@
     <ApplicationIcon>esb.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>EquipmentSatusBoard.MainWindow</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -87,10 +88,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="App.xaml">
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
+    </ApplicationDefinition>
     <Compile Include="CommonControls\LabelButton.xaml.cs">
       <DependentUpon>LabelButton.xaml</DependentUpon>
     </Compile>

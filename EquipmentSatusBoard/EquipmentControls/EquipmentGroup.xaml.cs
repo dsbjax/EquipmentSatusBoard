@@ -1,5 +1,4 @@
 ﻿using EquipmentSatusBoard.AppModeControls;
-using EquipmentSatusBoard.CommonControls;
 using EquipmentSatusBoard.Forms;
 using EquipmentSatusBoard.StatusBoardControl;
 using System;
@@ -84,6 +83,7 @@ namespace EquipmentSatusBoard.EquipmentControls
 
 
                 string line;
+
                 while (!(line = statusLines.ReadLine()).Equals("End Group"))
                 {
                     if (line.StartsWith("Start Group:"))
@@ -112,9 +112,31 @@ namespace EquipmentSatusBoard.EquipmentControls
                 SetMode(AppMode.Slide);
                 SetTags();
 
-            }catch(Exception e)
+            }catch(OutOfMemoryException e)
             {
-                var error = "Error Initializine Main Window";
+                var error = "Error Importing Equipment Group:\nAn Out of Memory Exception occured\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }
+            catch (IOException e)
+            {
+                var error = "Error Importing Equipment Group:\nAn IO Exception occured\nSee dump file";
+
+                ErrorLogger.ErrorDialog(error, ErrorType.Failure);
+                ErrorLogger.LogError(error, e,
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    Properties.Settings.Default.AppDataFolder +
+                    Properties.Settings.Default.ErrorLogFilename);
+
+            }
+            catch (Exception e)
+            {
+                var error = "Error Importing Equipment Group:\nAn Unknown Exception occured\nSee dump file";
 
                 ErrorLogger.ErrorDialog(error, ErrorType.Failure);
                 ErrorLogger.LogError(error, e,
