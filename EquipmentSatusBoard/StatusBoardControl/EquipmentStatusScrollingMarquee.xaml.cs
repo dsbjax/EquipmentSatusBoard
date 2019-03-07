@@ -42,14 +42,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
         {
             base.OnRenderSizeChanged(sizeInfo);
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation
-            {
-                From = -2 * equipmentStatus.ActualWidth,
-                To = marqueeCanvas.ActualWidth,
-                RepeatBehavior = RepeatBehavior.Forever,
-                Duration = new Duration(TimeSpan.Parse("0:0:30"))
-            };
-            equipmentStatus.BeginAnimation(Canvas.RightProperty, doubleAnimation);
+            ConfigureStatusMarquee();
         }
 
         public static void AddEquipmentStatusText(string text)
@@ -58,7 +51,11 @@ namespace EquipmentSatusBoard.StatusBoardControl
                 equipmentStatus.Text += DELIMITOR;
 
             equipmentStatus.Text += text;
+            ConfigureStatusMarquee();
+        }
 
+        private static void ConfigureStatusMarquee()
+        {
             DoubleAnimation doubleAnimation = new DoubleAnimation
             {
                 From = -2 * equipmentStatus.ActualWidth,
@@ -76,14 +73,7 @@ namespace EquipmentSatusBoard.StatusBoardControl
             if (equipmentStatus.Text.EndsWith(DELIMITOR))
                 equipmentStatus.Text = equipmentStatus.Text.Remove(equipmentStatus.Text.Length - DELIMITOR.Length);
 
-            DoubleAnimation doubleAnimation = new DoubleAnimation
-            {
-                From = -equipmentStatus.ActualWidth,
-                To = marqueeCanvas.ActualWidth,
-                RepeatBehavior = RepeatBehavior.Forever,
-                Duration = new Duration(TimeSpan.Parse("0:0:30"))
-            };
-            equipmentStatus.BeginAnimation(Canvas.RightProperty, doubleAnimation);
+            ConfigureStatusMarquee();
         }
 
     }
